@@ -1,6 +1,6 @@
 ---
 title: "Class Reference"
-author: "Derek Willis"
+author: "Michael Howes"
 output:
   html_document:
     theme: cerulean
@@ -33,3 +33,28 @@ setwd("~/jour472/data_journalism_2024_fall")
 install.packages("tidyverse")
 library(tidyverse)
 ```
+
+library(readr)
+library(dplyr)
+
+These two commands import the readr and dplyr libraries. THe library readr reads different types of data while dplyr analyzes the data. 
+
+How to import data --- EXAMPLE
+
+Marland_winred_contributions <-read_rds("maryland_winred.rds")
+
+Variable: maryland_winred_contributions 
+  - Variables are the name to refer to complex things, in this case being the data imported into R to serve as a dataframe. 
+
+Variable assignment operator: <-
+  - Assigns something to a word
+  
+Arguments: What is inside the read_rds() function
+- the name of the file that wats to be loaded
+
+
+sum(): Takes the sum of all the values
+
+summarize(): Inside the parentheses in summarize,  set up the summaries that are wanted. 
+
+arrange (): Arranges data in order. In ascending order by default, but can by sorted in descending order.
