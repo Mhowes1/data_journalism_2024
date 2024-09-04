@@ -1,6 +1,6 @@
 ---
 title: "pre_lab_01.Rmd"
-author: "Derek Willis"
+author: "Michael Howes"
 date: "2024-08-01"
 output: html_document
 ---
@@ -126,13 +126,13 @@ maryland_winred_contributions |>
   group_by(date) |>
   summarise(
     count_contribs = n()
-  ) |>
-arrange(desc(count_contribs))
+  )
+
 ```
 
 Describe what you think this code is doing below. What does the answer represent, compared to the results from `head()`?
 
-**Answer**
+**These results group the number of contributions by date. The results from 'head()' just represent random contributions. **
 
 ### Task 7: Adding arrange()
 
@@ -142,14 +142,13 @@ Describe what you think this code is doing below. What does the answer represent
 maryland_winred_contributions |>
   group_by(date) |>
   summarise(
-    count_contribs = n()
-  ) |>
+    count_contribs = n())|>
   arrange(desc(count_contribs))
 ```
 
 Compared to the previous codeblock, what has changed and how did that affect the result?
 
-**Answer**
+**The answer represents the days that saw the most contributions. **
 
 ### Task 8: Multiple grouping
 
@@ -166,7 +165,7 @@ maryland_winred_contributions |>
 
 Compared to the previous codeblock, what has changed and how did that affect the result?
 
-**Answer**
+**This shows the amount of times a certain amount of donated to a committee. For example, it shows that the Trump National Committee was donated one dollar 3,452 times. **
 
 ### Task 9
 
@@ -184,7 +183,7 @@ maryland_winred_contributions |>
 
 Compared to the previous codeblock, what has changed and how did that affect the result? 
 
-**Answer**
+**This now shows the total ammount that was donated to a committee, as well the amount of contriutions.**
 
 ### Task 10: More descriptive statistics
 
@@ -204,7 +203,7 @@ maryland_winred_contributions |>
 
 Compared to the previous codeblock, what has changed and how did that affect the result? Glancing at the names, which of the top results from Maryland?
 
-**Answer**
+**It reveals the mean and the median of each different committee from its contributions. Hogan for Maryland is shown to have recieved the highest mean contribution.  **
 
 ### Task 11
 
@@ -224,4 +223,4 @@ maryland_winred_contributions |>
   arrange(desc(total_amount))
 ```
 
-Compared to the previous codeblock, what has changed and how did that affect the result? How is the data sorted? **Answer**
+Compared to the previous codeblock, what has changed and how did that affect the result? How is the data sorted? **This now shows the contribution data in revelance to the city the contributions are being made in. It shows the mean, median, min, and max amounts for each city, as well as the total amounts. **
