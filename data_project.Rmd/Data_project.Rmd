@@ -38,6 +38,3 @@ top_reimbursement_expenses <- reimbursement_expenses |>
 ```
 
 
-
-
-
