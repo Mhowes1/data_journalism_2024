@@ -109,7 +109,7 @@ When the join column is obvious - it's the same name in both dataframes - R will
 
 ### Task 7: Assign Joined Data to New Dataframe
 
-**Task** Create a new dataframe with population and voter data joined together. What does the output message below say about the join? **It is saying that "left_join" is being used with the "County" columb to combine the two data frames.**
+**Task** Create a new dataframe with population and voter data joined together. What does the output message below say about the join? **It is saying that "left_join" is being used with the "County" column to combine the two data frames.**
 
 ```{r}
 maryland_population_with_voters <- maryland_population |> left_join(county_voters_2020)
