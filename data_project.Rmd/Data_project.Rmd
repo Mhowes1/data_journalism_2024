@@ -3,15 +3,13 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code.
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*.
 
 Task 1: Load libraries and establish settings:
 
-```{r} setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+`{r} setup, include=FALSE} knitr::opts_chunk$set(echo = TRUE)`
 
 ```{r}
 library(tidyverse)
@@ -19,8 +17,8 @@ library(lubridate)
 library(janitor)
 ```
 
-
 Task 2: load data
+
 ```{r}
 quarter_one <- read_csv("data/JAN-MAR-2023-SOD.csv")
 quarter_two <- read_csv("data/APRIL-JUNE 2023 SOD.csv")
@@ -35,12 +33,15 @@ Task 3: Fix the parsing error with quarter_three csv by deleting the extra colum
 quarter_three <- read_csv("data/JULY-SEPTEMBER-2023SOD.csv")
 
 ```
+
 ```{r}
 problems(quarter_three)
 ```
+
 ```{r}
 head(quarter_three)
 ```
+
 ```{r}
 quarter_three_fixed <- quarter_three |>
   select(-...19)
@@ -58,15 +59,11 @@ Task 5: clean up data. Fix headers using janitor, fix datatype for dates and bud
 ```{r}
 head(full_year_2023) 
 ```
+
 ```{r}
 clean_full_year_2023 <- full_year_2023 |> 
   clean_names()
 ```
-
-```{r}
-head(clean_full_year_2023)
-```
-
 
 ```{r}
 clean_full_year_2023 <- clean_full_year_2023 |> 
@@ -75,4 +72,62 @@ clean_full_year_2023 <- clean_full_year_2023 |>
     end_date = dmy(perform_end_dt, quiet = TRUE)
   )
 ```
-NOTE: there's a parsing warning above. I thought it was from the totals columns, but now I'm not sure because it says there's only 1 "failed to parse" issue. There's also some wonkiness in the data where some amounts are negative -- I'm not sure what that's about either. Could you guys take a look?
+
+
+```{r}
+  clean_full_year_2023$budget_object_code <- as.character(clean_full_year_2023$budget_object_code)
+```
+
+Finding 1: Rep. Jack Bergman (R-Mich.) was the program’s top spender last year. He was reimbursed more than \$32,000 for lodging and nearly \$12,000 for meals in 2023, according to data released by the House as of Tuesday.
+
+Step 1: Filter for Bergman's expenses. His organization name (2023 HON. JACK BERGMAN) isn't great for r because of the spacing and punctuation, so let's use his organzation code: MI01BEJ. 
+
+
+```{r}
+bergman_expenses <- clean_full_year_2023 |>
+  filter(organization_code == "MI01BEJ") 
+
+```
+
+Step 2: Make a new datagram filtering for Bergman's personal travel and lodging expenses that he sought reimbursement for using budget codes 2107 and 2109, which we identified as the relevant codes using this article: https://www.washingtonpost.com/politics/2024/06/13/house-expenses-receipts-database-list/. Make the result a little easier to read using select. (first dataframe probably not necessary, but helped us to think through the problem)
+
+
+```{r}
+bergman_program_expenses <- bergman_expenses |>
+  select(description, budget_object_code, amount, start_date, end_date)  |>
+  filter(budget_object_code == "2107" | budget_object_code == "2109")
+```
+
+NOTE: At this point we found that Bergman does not have any budget expenses recorded with these codes. We are not sure why. One possible explanation is that there are other codes besides the two shown in the article linked above. We contacted the author of the article (Clara Ence Morse) to ask if there are other codes we should look for. In the meantime, we moved on to finding #2. 
+
+
+Finding #2: Rep. Matt Gaetz (R-Fla.) was the program’s second-highest overall spender, according to filings released as of Tuesday, with over $30,000 in lodging expenses and more than $11,000 for meals in 2023.
+
+Task 1: Create dataframe of just Gaetz's expenses using filter. let's use his organzation code: FL01GAM.
+
+```{r}
+gaetz_expenses <- clean_full_year_2023 |>
+  filter(organization_code == "FL01GAM")
+```
+
+Task 2:Make a new datagram filtering for Gaetz's personal travel and lodging expenses that he sought reimbursement for using budget codes 2107 and 2109, which we identified as the relevant codes using this article: https://www.washingtonpost.com/politics/2024/06/13/house-expenses-receipts-database-list/. Make the result a little easier to read using select. (first dataframe probably not necessary, but helped us to think through the problem)
+
+```{r}
+gaetz_program_expenses <- gaetz_expenses|>
+  select(description, budget_object_code, amount, start_date, end_date)  |>
+  filter(budget_object_code == "2107" | budget_object_code == "2109")
+
+```
+
+Task 3: add up the total spending on meals and lodging.
+
+```{r}
+gaetz_program_expenses |>
+  group_by(budget_object_code) |>
+  summarize(
+    total_amount = sum(amount)
+  )
+  
+```
+NOTE: these results are close to the numbers from the article ("over $30,000 in lodging expenses and more than $11,000 for meals in 2023"), but not quite the same. This could be because we need to include other budget object codes (BOC), or because there is some error in the data that we downloaded or that we created while cleaning the data. We hope that when we resolve the BOC question we will be closer to an answer.
+
