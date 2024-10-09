@@ -24,7 +24,7 @@ quarter_one <- read_csv("data/JAN-MAR-2023-SOD.csv")
 quarter_two <- read_csv("data/APRIL-JUNE 2023 SOD.csv")
 quarter_three <- read_csv("data/JULY-SEPTEMBER-2023SOD.csv")
 quarter_four <- read_csv("data/OCT-DEC-2023-SOD.csv")
-
+quarter_five <- read_csv("data/JAN-MAR-2024-SOD-DETAIL-GRID-FINAL.csv")
 ```
 
 Task 3: Fix the parsing error with quarter_three csv by deleting the extra column.
@@ -50,7 +50,7 @@ quarter_three_fixed <- quarter_three |>
 Task 4: bind the dataframes so we have one year's worth of data
 
 ```{r}
-full_year_2023 <- bind_rows(list(quarter_one, quarter_two, quarter_three_fixed, quarter_four))
+full_year_2023 <- bind_rows(list(quarter_one, quarter_two, quarter_three_fixed, quarter_four, quarter_five))
 view(full_year_2023)
 ```
 
@@ -95,8 +95,18 @@ Step 2: Make a new datagram filtering for Bergman's personal travel and lodging 
 ```{r}
 bergman_program_expenses <- bergman_expenses |>
   select(description, budget_object_code, amount, start_date, end_date)  |>
-  filter(budget_object_code == "2107" | budget_object_code == "2109")
+  filter(budget_object_code == "2107" | budget_object_code == "2109") 
 ```
+
+```{r}
+total_bergman_program_expenses <- bergman_program_expenses |>
+    group_by(budget_object_code) |>
+    summarize(
+        total_amount = sum(amount)
+    )
+```
+
+
 
 NOTE: At this point we found that Bergman does not have any budget expenses recorded with these codes. We are not sure why. One possible explanation is that there are other codes besides the two shown in the article linked above. We contacted the author of the article (Clara Ence Morse) to ask if there are other codes we should look for. In the meantime, we moved on to finding #2. 
 

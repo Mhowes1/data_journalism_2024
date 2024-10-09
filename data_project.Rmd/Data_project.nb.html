@@ -11,7 +11,7 @@
 
 
 
-<title>data_project.Rmd</title>
+<title>R Notebook</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1746,7 +1746,7 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">data_project.Rmd</h1>
+<h1 class="title toc-ignore">R Notebook</h1>
 
 </div>
 
@@ -1758,28 +1758,27 @@ beneath the code.</p>
 <p>Try executing this chunk by clicking the <em>Run</em> button within
 the chunk or by placing your cursor inside it and pressing
 <em>Cmd+Shift+Enter</em>.</p>
-<!-- rnb-text-end -->
-<!-- rnb-text-begin -->
+<p>Task 1: Load libraries and establish settings:</p>
+<p><code>{r} setup, include=FALSE} knitr::opts_chunk$set(echo = TRUE)</code></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
 <pre class="r"><code>library(tidyverse)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoi4pSA4pSAIEF0dGFjaGluZyBjb3JlIHRpZHl2ZXJzZSBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDIuMC4wIOKUgOKUgFxu4pyUIGRwbHlyICAgICAxLjEuNCAgICAg4pyUIHJlYWRyICAgICAyLjEuNVxu4pyUIGZvcmNhdHMgICAxLjAuMCAgICAg4pyUIHN0cmluZ3IgICAxLjUuMVxu4pyUIGdncGxvdDIgICAzLjUuMSAgICAg4pyUIHRpYmJsZSAgICAzLjIuMVxu4pyUIGx1YnJpZGF0ZSAxLjkuMyAgICAg4pyUIHRpZHlyICAgICAxLjMuMVxu4pyUIHB1cnJyICAgICAxLjAuMiAgICAgXG7ilIDilIAgQ29uZmxpY3RzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG7inJYgZHBseXI6OmZpbHRlcigpIG1hc2tzIHN0YXRzOjpmaWx0ZXIoKVxu4pyWIGRwbHlyOjpsYWcoKSAgICBtYXNrcyBzdGF0czo6bGFnKClcbuKEuSBVc2UgdGhlIFx1MDAxYl04OztodHRwOi8vY29uZmxpY3RlZC5yLWxpYi5vcmcvXHUwMDA3Y29uZmxpY3RlZCBwYWNrYWdlXHUwMDFiXTg7O1x1MDAwNyB0byBmb3JjZSBhbGwgY29uZmxpY3RzIHRvIGJlY29tZSBlcnJvcnNcbiJ9 -->
-<pre><code>── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+<!-- rnb-output-begin eyJkYXRhIjoi4pSA4pSAIEF0dGFjaGluZyBjb3JlIHRpZHl2ZXJzZSBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDIuMC4wIOKUgOKUgFxu4pyUIGRwbHlyICAgICAxLjEuNCAgICAg4pyUIHJlYWRyICAgICAyLjEuNVxu4pyUIGZvcmNhdHMgICAxLjAuMCAgICAg4pyUIHN0cmluZ3IgICAxLjUuMVxu4pyUIGdncGxvdDIgICAzLjUuMSAgICAg4pyUIHRpYmJsZSAgICAzLjIuMVxu4pyUIGx1YnJpZGF0ZSAxLjkuMyAgICAg4pyUIHRpZHlyICAgICAxLjMuMVxu4pyUIHB1cnJyICAgICAxLjAuMiAgICAgXG7ilIDilIAgQ29uZmxpY3RzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG7inJYgZHBseXI6OmZpbHRlcigpIG1hc2tzIHN0YXRzOjpmaWx0ZXIoKVxu4pyWIGRwbHlyOjpsYWcoKSAgICBtYXNrcyBzdGF0czo6bGFnKClcbuKEuSBVc2UgdGhlIFx1MDAxYl04OztodHRwOi8vY29uZmxpY3RlZC5yLWxpYi5vcmcvXHUwMDA3Y29uZmxpY3RlZCBwYWNrYWdlXHUwMDFiXTg7O1x1MDAwNyB0byBmb3JjZSBhbGwgY29uZmxpY3RzIHRvIGJlY29tZSBlcnJvcnNcbiJ9 -->
+<pre><code>── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
-── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+── Conflicts ───────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the ]8;;http://conflicted.r-lib.org/conflicted package]8;; to force all conflicts to become errors</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsdWJyaWRhdGUpXG5saWJyYXJ5KHJlZmlucilcbmxpYnJhcnkoamFuaXRvcilcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsdWJyaWRhdGUpXG5saWJyYXJ5KGphbml0b3IpXG5gYGAifQ== -->
 <pre class="r"><code>library(lubridate)
-library(refinr)
 library(janitor)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYamFuaXRvcuKAmVxuXG5UaGUgZm9sbG93aW5nIG9iamVjdHMgYXJlIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6c3RhdHPigJk6XG5cbiAgICBjaGlzcS50ZXN0LCBmaXNoZXIudGVzdFxuIn0= -->
@@ -1790,38 +1789,313 @@ The following objects are masked from ‘package:stats’:
 
     chisq.test, fisher.test</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkcGx5cilcbmBgYCJ9 -->
-<pre class="r"><code>library(dplyr)</code></pre>
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Task 2: load data</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVhcnRlcl9vbmUgPC0gcmVhZF9jc3YoXCJkYXRhL0pBTi1NQVItMjAyMy1TT0QuY3N2XCIpXG5gYGAifQ== -->
+<pre class="r"><code>quarter_one &lt;- read_csv(&quot;data/JAN-MAR-2023-SOD.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTM4MTgxIENvbHVtbnM6IDE4XG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDE1KTogT1JHQU5JWkFUSU9OLCBGSVNDQUwgWUVBUiBPUiBMRUdJU0xBVElWRSBZRUFSLCBPUkdBTklaQVRJT04gQ09ERSwgUFJPR1JBTSwgUFJPR1JBTSBDT0RFLCBTT1JUIFNVQlRPVEFMIERFLi4uXG5kYmwgICgzKTogQlVER0VUIE9CSkVDVCBDTEFTUywgQlVER0VUIE9CSkVDVCBDT0RFLCBBTU9VTlRcblxu4oS5IFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxu4oS5IFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
+<pre><code>Rows: 138181 Columns: 18
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (15): ORGANIZATION, FISCAL YEAR OR LEGISLATIVE YEAR, ORGANIZATION CODE, PROGRAM, PROGRAM CODE, SORT SUBTOTAL DE...
+dbl  (3): BUDGET OBJECT CLASS, BUDGET OBJECT CODE, AMOUNT
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVhcnRlcl90d28gPC0gcmVhZF9jc3YoXCJkYXRhL0FQUklMLUpVTkUgMjAyMyBTT0QuY3N2XCIpXG5gYGAifQ== -->
+<pre class="r"><code>quarter_two &lt;- read_csv(&quot;data/APRIL-JUNE 2023 SOD.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTMxNTgzIENvbHVtbnM6IDE4XG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDE1KTogT1JHQU5JWkFUSU9OLCBGSVNDQUwgWUVBUiBPUiBMRUdJU0xBVElWRSBZRUFSLCBPUkdBTklaQVRJT04gQ09ERSwgUFJPR1JBTSwgUFJPR1JBTSBDT0RFLCBTT1JUIFNVQlRPVEFMIERFLi4uXG5kYmwgICgzKTogQlVER0VUIE9CSkVDVCBDTEFTUywgQlVER0VUIE9CSkVDVCBDT0RFLCBBTU9VTlRcblxu4oS5IFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxu4oS5IFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
+<pre><code>Rows: 131583 Columns: 18
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (15): ORGANIZATION, FISCAL YEAR OR LEGISLATIVE YEAR, ORGANIZATION CODE, PROGRAM, PROGRAM CODE, SORT SUBTOTAL DE...
+dbl  (3): BUDGET OBJECT CLASS, BUDGET OBJECT CODE, AMOUNT
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVhcnRlcl90aHJlZSA8LSByZWFkX2NzdihcImRhdGEvSlVMWS1TRVBURU1CRVItMjAyM1NPRC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code>quarter_three &lt;- read_csv(&quot;data/JULY-SEPTEMBER-2023SOD.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxu4oCiIGBgIC0+IGAuLi4xOWBcbiJ9 -->
+<pre><code>New names:
+• `` -&gt; `...19`</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogT25lIG9yIG1vcmUgcGFyc2luZyBpc3N1ZXMsIGNhbGwgYHByb2JsZW1zKClgIG9uIHlvdXIgZGF0YSBmcmFtZSBmb3IgZGV0YWlscywgZS5nLjpcbiAgZGF0IDwtIHZyb29tKC4uLilcbiAgcHJvYmxlbXMoZGF0KVxuIn0= -->
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTM0MzgwIENvbHVtbnM6IDE5XG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDE1KTogT1JHQU5JWkFUSU9OLCBGSVNDQUwgWUVBUiBPUiBMRUdJU0xBVElWRSBZRUFSLCBPUkdBTklaQVRJT04gQ09ERSwgUFJPR1JBTSwgUFJPR1JBTSBDT0RFLCBTT1JUIFNVQlRPVEFMIERFLi4uXG5kYmwgICgzKTogQlVER0VUIE9CSkVDVCBDTEFTUywgQlVER0VUIE9CSkVDVCBDT0RFLCBBTU9VTlRcbmxnbCAgKDEpOiAuLi4xOVxuXG7ihLkgVXNlIGBzcGVjKClgIHRvIHJldHJpZXZlIHRoZSBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9uIGZvciB0aGlzIGRhdGEuXG7ihLkgU3BlY2lmeSB0aGUgY29sdW1uIHR5cGVzIG9yIHNldCBgc2hvd19jb2xfdHlwZXMgPSBGQUxTRWAgdG8gcXVpZXQgdGhpcyBtZXNzYWdlLlxuIn0= -->
+<pre><code>Rows: 134380 Columns: 19
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (15): ORGANIZATION, FISCAL YEAR OR LEGISLATIVE YEAR, ORGANIZATION CODE, PROGRAM, PROGRAM CODE, SORT SUBTOTAL DE...
+dbl  (3): BUDGET OBJECT CLASS, BUDGET OBJECT CODE, AMOUNT
+lgl  (1): ...19
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVhcnRlcl9mb3VyIDwtIHJlYWRfY3N2KFwiZGF0YS9PQ1QtREVDLTIwMjMtU09ELmNzdlwiKVxuYGBgIn0= -->
+<pre class="r"><code>quarter_four &lt;- read_csv(&quot;data/OCT-DEC-2023-SOD.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTI1MjkzIENvbHVtbnM6IDE4XG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDE1KTogT1JHQU5JWkFUSU9OLCBGSVNDQUwgWUVBUiBPUiBMRUdJU0xBVElWRSBZRUFSLCBPUkdBTklaQVRJT04gQ09ERSwgUFJPR1JBTSwgUFJPR1JBTSBDT0RFLCBTT1JUIFNVQlRPVEFMIERFLi4uXG5kYmwgICgzKTogQlVER0VUIE9CSkVDVCBDTEFTUywgQlVER0VUIE9CSkVDVCBDT0RFLCBBTU9VTlRcblxu4oS5IFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxu4oS5IFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
+<pre><code>Rows: 125293 Columns: 18
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (15): ORGANIZATION, FISCAL YEAR OR LEGISLATIVE YEAR, ORGANIZATION CODE, PROGRAM, PROGRAM CODE, SORT SUBTOTAL DE...
+dbl  (3): BUDGET OBJECT CLASS, BUDGET OBJECT CODE, AMOUNT
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVhcnRlcl9maXZlIDwtIHJlYWRfY3N2KFwiZGF0YS9KQU4tTUFSLTIwMjQtU09ELURFVEFJTC1HUklELUZJTkFMLmNzdlwiKVxuYGBgIn0= -->
+<pre class="r"><code>quarter_five &lt;- read_csv(&quot;data/JAN-MAR-2024-SOD-DETAIL-GRID-FINAL.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTUwMDMzIENvbHVtbnM6IDE4XG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDE1KTogT1JHQU5JWkFUSU9OLCBGSVNDQUwgWUVBUiBPUiBMRUdJU0xBVElWRSBZRUFSLCBPUkdBTklaQVRJT04gQ09ERSwgUFJPR1JBTSwgUFJPR1JBTSBDT0RFLCBTT1JUIFNVQlRPVEFMIERFLi4uXG5kYmwgICgzKTogQlVER0VUIE9CSkVDVCBDTEFTUywgQlVER0VUIE9CSkVDVCBDT0RFLCBBTU9VTlRcblxu4oS5IFVzZSBgc3BlYygpYCB0byByZXRyaWV2ZSB0aGUgZnVsbCBjb2x1bW4gc3BlY2lmaWNhdGlvbiBmb3IgdGhpcyBkYXRhLlxu4oS5IFNwZWNpZnkgdGhlIGNvbHVtbiB0eXBlcyBvciBzZXQgYHNob3dfY29sX3R5cGVzID0gRkFMU0VgIHRvIHF1aWV0IHRoaXMgbWVzc2FnZS5cbiJ9 -->
+<pre><code>Rows: 150033 Columns: 18
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (15): ORGANIZATION, FISCAL YEAR OR LEGISLATIVE YEAR, ORGANIZATION CODE, PROGRAM, PROGRAM CODE, SORT SUBTOTAL DE...
+dbl  (3): BUDGET OBJECT CLASS, BUDGET OBJECT CODE, AMOUNT
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Task 3: Fix the parsing error with quarter_three csv by deleting the
+extra column.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVhcnRlcl90aHJlZSA8LSByZWFkX2NzdihcImRhdGEvSlVMWS1TRVBURU1CRVItMjAyM1NPRC5jc3ZcIilcbmBgYCJ9 -->
+<pre class="r"><code>quarter_three &lt;- read_csv(&quot;data/JULY-SEPTEMBER-2023SOD.csv&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTmV3IG5hbWVzOlxu4oCiIGBgIC0+IGAuLi4xOWBcbiJ9 -->
+<pre><code>New names:
+• `` -&gt; `...19`</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogT25lIG9yIG1vcmUgcGFyc2luZyBpc3N1ZXMsIGNhbGwgYHByb2JsZW1zKClgIG9uIHlvdXIgZGF0YSBmcmFtZSBmb3IgZGV0YWlscywgZS5nLjpcbiAgZGF0IDwtIHZyb29tKC4uLilcbiAgcHJvYmxlbXMoZGF0KVxuIn0= -->
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details, e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMTM0MzgwIENvbHVtbnM6IDE5XG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5EZWxpbWl0ZXI6IFwiLFwiXG5jaHIgKDE1KTogT1JHQU5JWkFUSU9OLCBGSVNDQUwgWUVBUiBPUiBMRUdJU0xBVElWRSBZRUFSLCBPUkdBTklaQVRJT04gQ09ERSwgUFJPR1JBTSwgUFJPR1JBTSBDT0RFLCBTT1JUIFNVQlRPVEFMIERFLi4uXG5kYmwgICgzKTogQlVER0VUIE9CSkVDVCBDTEFTUywgQlVER0VUIE9CSkVDVCBDT0RFLCBBTU9VTlRcbmxnbCAgKDEpOiAuLi4xOVxuXG7ihLkgVXNlIGBzcGVjKClgIHRvIHJldHJpZXZlIHRoZSBmdWxsIGNvbHVtbiBzcGVjaWZpY2F0aW9uIGZvciB0aGlzIGRhdGEuXG7ihLkgU3BlY2lmeSB0aGUgY29sdW1uIHR5cGVzIG9yIHNldCBgc2hvd19jb2xfdHlwZXMgPSBGQUxTRWAgdG8gcXVpZXQgdGhpcyBtZXNzYWdlLlxuIn0= -->
+<pre><code>Rows: 134380 Columns: 19
+── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (15): ORGANIZATION, FISCAL YEAR OR LEGISLATIVE YEAR, ORGANIZATION CODE, PROGRAM, PROGRAM CODE, SORT SUBTOTAL DE...
+dbl  (3): BUDGET OBJECT CLASS, BUDGET OBJECT CODE, AMOUNT
+lgl  (1): ...19
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJvYmxlbXMocXVhcnRlcl90aHJlZSlcbmBgYCJ9 -->
+<pre class="r"><code>problems(quarter_three)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6NSwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDUiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBNzFTUzArRFFCRGVGbWh0RTk4bmI0MG5QY0JxOVdDUGFpR3BxV2xUSU5HVFdaZlZvckJMV0ZDUC9oSC9hdXZ3V0tQOEFFbUduZmxtdnAzWExzWjNaLzI3UGtKSVE3cmVRcG9CS2pKOHp6RXZFTkxiWUxTUWpuckYrUUZCKzRVWFpCTUVuSWRmbFNnYjdZSVVNVHVsWFJFM3lDQVErV1BFYW52dkZKOWdEenZZVy9nMmRpNm5ydDFnSE13Y1ozSnREMXgvUHA5T2JIZHdOUE05ZHpLMmordUFybms2SEZtalVZTkhzUzlaS25FYzBpVmgwVks4TTRuSGd1WXg0NW5FQWNuSXc0dklVMDZpVU1ZUHc1UGhlUVVtcVhoaE5MTVdjVkFDK01hZjNwdXVQZmZzMnl0N1lVTGttVHNiVzFTKy9XZXF2d3N3T0ltWnJGczJhbEJMeGJ0U3FZalV5TmxIQWtsWVVOc2RRck9jS0svK0ZNSXkvbDdlZzNzc2xhRGM1aWY4MXV2MXFsa0ZqWWhVVlNpd1gzUmlQYVhBQjZ0SjZZb2tDd1VIVXJ0NEc1MEd1WlUyZ08yY0Y1VUVKbDNtL05VOGI3aTFoRDhYT1V1bytqWnJ2ZjFMTjZvcTJ1dWEzbEd6WVB3NTVPb3hHaEY1Wkdvd1dzRFVmcmRnSHVVNHJDUU5lYWI2QkZSYW1jaCtadG1Ib1N1azdCeXR2Z0VxWDhJRFZBTUFBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["row"],"name":[1],"type":["int"],"align":["right"]},{"label":["col"],"name":[2],"type":["int"],"align":["right"]},{"label":["expected"],"name":[3],"type":["chr"],"align":["left"]},{"label":["actual"],"name":[4],"type":["chr"],"align":["left"]},{"label":["file"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"8861","2":"17","3":"a double","4":"OFFICE SUPPLIES (OUTSIDE)","5":"/Users/michaelhowes/Documents/data_journalism_2024/data_project.Rmd/data/JULY-SEPTEMBER-2023SOD.csv"},{"1":"8861","2":"19","3":"1/0/T/F/TRUE/FALSE","4":"-129.99","5":"/Users/michaelhowes/Documents/data_journalism_2024/data_project.Rmd/data/JULY-SEPTEMBER-2023SOD.csv"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChxdWFydGVyX3RocmVlKVxuYGBgIn0= -->
+<pre class="r"><code>head(quarter_three)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6MTksInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiNiDDlyAxOSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUE5VVZTMDhUUVhnb3RGRGVVaVhSU0p5VEY5T0dnaVI2WTNibmF6dXd1MU5uZGduMVlGS2hJckcyQklwNjlPalZIK0xKay8vQ3MwZFAvZ1lQNkxmYm5kSmROVUhzQVRlWnpQZCt6UGRZeFhmWHAzZW5DU0hqWkdKaWpJeG5FU1Rad0s4VUh4QXlrVUZrakV5UWZIaS9RYUVDQXVGWnhKT0xHYmZXVnRmV3FheFVoQTE0VWI4R1ZOZUJiWVA2anlTU09lV2NSaWc3SWl4cGUzS3RyR3RJSHlXYTlIQzlDaDRvNWxEWXJZUEhoUjhvMEZlS2w0dzNHL0grSFVsYVhhNkQwdEx6d0tHMmRKR3ZtUytrZDBXNWhNeUhzVy9lSmRGMzBUdmR0eHg4SnB3UlljWTJJZmtmK1AzRlBSeFRwdXBjQWhxTjd4c1dhemlncVYxVFF2dXlYZ05GV1NsbXpsbkFQYWFveTlRMmRXTml3UUxsUzBkNGdtb2Zkc0NqeXNndldRTFJoS21ZYzgwS0s2cm9GbmllcUNCZ01wbTNBclVOVk1uUUt0MGFVVlpUNWVMV2FiczQyRE9qdzVOKzh1dXJSZDA2T2hlOERLRzhrWFNXWC8rRHR3VmRZd280QmJmdXlBYUFHWmdhTUI1dWF4d1hOL0NFSGMyTFdTL0xFdWVwVDBFQnFiandtQy9Od3IvTmhRSWI4VkMvNHNnUUdNakhNaXNjNm9IZm9NT2kycTRCRDdBSnFxWXJrczRwRXh3R0kvditmbjhrTDNnUDlMNDg2ZE8vM1hzYjNaOVgrdmpYRDV2Ui9mRmRILyswYi9UQ0gzVXVGUDdkU2YydnM1M215OVpKL01hRm1EZ3JWWlY1NHZId1JycFRFZHJHQmQwQW5BWE0zNEdxMEE1SzdFQkVNejArcklwdnpVMkJKdXRLVmhVekF6UWJvOE1pTjdYRTl0ZUI1VXNmUFhIUXRoTDFvUmdLVnNDcjRGTnBiV0VScU8wd2Jlb3oxOWVGUndGNHRqRzQ2Q3VHbTlPT1l1SE1OL1FaaEJuVk1sQUQwU2t1N2NBRnp6Y2lPTk1jMC9TWWEwVHlNVWx3WXg2YnBDS1ZpeXVBb1hOdWRPY05IZVhQcVRPLzVyT1V5dWY4S1hMTWxjRWdtR3lwVkNvL1RGVXVmOXg5WFRMVm04T1RDY3VMYStCN3VzUjc3ZWFKS2JFaFR1ODNlODNTczJQVVIrd3NwVExaUGVvZGRqdW9sQ21RL2lZYVZoNDdUaEVXVGp0aEpQdkZ2ZWVublJmRmpSUjcvS2h6RVBmbFdOeWpjekdjRzRJTC9TZ3k2VVdXYTNVT0Rqc3RrMDY3K2JUVk5wYjNXNi9NcStON1JNOVJPam8rN1BSTW5rZzlLZlc2dmFaUm1kN3J0ZzBseXB5Yy9RUkY0YnRpNEFvQUFBPT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["ORGANIZATION"],"name":[1],"type":["chr"],"align":["left"]},{"label":["FISCAL YEAR OR LEGISLATIVE YEAR"],"name":[2],"type":["chr"],"align":["left"]},{"label":["ORGANIZATION CODE"],"name":[3],"type":["chr"],"align":["left"]},{"label":["PROGRAM"],"name":[4],"type":["chr"],"align":["left"]},{"label":["PROGRAM CODE"],"name":[5],"type":["chr"],"align":["left"]},{"label":["SORT SUBTOTAL DESCRIPTION"],"name":[6],"type":["chr"],"align":["left"]},{"label":["BUDGET OBJECT CLASS"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["SORT SEQUENCE"],"name":[8],"type":["chr"],"align":["left"]},{"label":["TRANSACTION DATE"],"name":[9],"type":["chr"],"align":["left"]},{"label":["DATA SOURCE"],"name":[10],"type":["chr"],"align":["left"]},{"label":["DOCUMENT"],"name":[11],"type":["chr"],"align":["left"]},{"label":["VENDOR NAME"],"name":[12],"type":["chr"],"align":["left"]},{"label":["VENDOR ID"],"name":[13],"type":["chr"],"align":["left"]},{"label":["PERFORM START DT"],"name":[14],"type":["chr"],"align":["left"]},{"label":["PERFORM END DT"],"name":[15],"type":["chr"],"align":["left"]},{"label":["DESCRIPTION"],"name":[16],"type":["chr"],"align":["left"]},{"label":["BUDGET OBJECT CODE"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["AMOUNT"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["...19"],"name":[19],"type":["lgl"],"align":["right"]}],"data":[{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BAYLES CHRISTOPHER A.","13":"NA","14":"1-Jul-23","15":"30-Sep-23","16":"SHARED EMPLOYEE","17":"1101","18":"27000","19":"NA"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BEDNAR MARK M","13":"NA","14":"1-Jul-23","15":"30-Sep-23","16":"HEAD OF COMMUNICATIONS","17":"1101","18":"49500","19":"NA"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BERTOLINI STEVEN R.","13":"NA","14":"1-Jul-23","15":"30-Sep-23","16":"OPERATIONS COORDINATOR","17":"1101","18":"16500","19":"NA"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BIEN CHRISTOPHER A","13":"NA","14":"1-Jul-23","15":"30-Sep-23","16":"DIRECTOR OF FLOOR OPERATIONS","17":"1101","18":"38250","19":"NA"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BONNER JENNIFER L","13":"NA","14":"1-Jul-23","15":"15-Jul-23","16":"DEPUTY DIRECTOR OF SCHEDULING","17":"1101","18":"5000","19":"NA"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BURKE ROBERT J","13":"NA","14":"1-Jul-23","15":"31-Jul-23","16":"COMMUNICATIONS AIDE","17":"1101","18":"6500","19":"NA"}],"options":{"columns":{"min":{},"max":[10],"total":[19]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucXVhcnRlcl90aHJlZV9maXhlZCA8LSBxdWFydGVyX3RocmVlIHw+XG4gIHNlbGVjdCgtLi4uMTkpXG5gYGAifQ== -->
+<pre class="r"><code>quarter_three_fixed &lt;- quarter_three |&gt;
+  select(-...19)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Rep. Jack Bergman (R-Mich.) was the program’s top spender last year.
-He was reimbursed more than $32,000 for lodging and nearly $12,000 for
-meals in 2023, according to data released by the House as of
+<p>Task 4: bind the dataframes so we have one year’s worth of data</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZnVsbF95ZWFyXzIwMjMgPC0gYmluZF9yb3dzKGxpc3QocXVhcnRlcl9vbmUsIHF1YXJ0ZXJfdHdvLCBxdWFydGVyX3RocmVlX2ZpeGVkLCBxdWFydGVyX2ZvdXIsIHF1YXJ0ZXJfZml2ZSkpXG52aWV3KGZ1bGxfeWVhcl8yMDIzKVxuYGBgIn0= -->
+<pre class="r"><code>full_year_2023 &lt;- bind_rows(list(quarter_one, quarter_two, quarter_three_fixed, quarter_four, quarter_five))
+view(full_year_2023)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Task 5: clean up data. Fix headers using janitor, fix datatype for
+dates and budget object codes.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChmdWxsX3llYXJfMjAyMykgXG5gYGAifQ== -->
+<pre class="r"><code>head(full_year_2023) </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6MTgsInN1bW1hcnkiOnsiQSB0aWJibGUiOlsiNiDDlyAxOCJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUE5VlZQMi9UUUJSMzB5UnQwaitVcEZTQ0FXNUNZa2pVSmlCMVFyM1k1K1JhMnhmdXppaEJMRzRiU2tWd3FqUUZCZ2ErQWVKck1MQWhNWGRoWUdkajZOZGdLTHc0dmlSMlVTbVFvVml5Nzk1N3YvZi8zcGtialhLMmtkVTBiVnBMSnFlMDZSUnN0WlFyemNLNnBpVVRRRXhwU1MzVFgxOEJLQStiSEx4TDhLWkR3WTNTYXFtTW1HbFNuY0NDWkkwZ1VTZDRpL0QvQ0JITktXMDErOWdKVVZIYk02VTFVUVArSk1tb2grVXFjUWpIRmlLTk9uRU1LbDFPeEtXU1JlTk5CYkovSjZKV1YrcUVDK1k0eEVJNnMwRXVzS1RNdWFSU1RWdnN4NzV4V3d1ZWk2N3hjMnNRaWFrMUlVcloxclRNRDNqK1lCMlBLVkcxL21JM0dkL1hLcmhwRVlIMEdxZENzbnFOY0lTTG9YQ2hRZ3dIYzJSanZvWHM4NWo1Q3VHU1dkU2hTRWp5a0RpSUYzOHZ5bFVva0JIWEUwcHJ0bHpZOVB6QzhLSTVRNjhWek5iMnVYTGI2LzVLSHZXVEtjZUFtZkpxMU5KWlJHazk2dnM4RzFGdlYwUU5jMklnWXRjdDFpUWtaTjgwYUpWS0hNeUw3VHBVRHdaR0lJTnlva3MyUXZIK25TNGt4NUpVcVI2RkQxMUliSm9JQ3dFOXdZNVVROGxnS2tPek9tUGNvQTZXVFAwMlZrSlBnZjBSY2ppeTcrNE9SdktDNjFEdjY2ZjNKOVVQeXh0ZkdnUDVOMnV3SHArNHgyOGYzOW40K0hwQWY3NGZxa1greHluZmU5NDZERXVZQzVuempGZXhReCtONTN6THBFS0g4alVKSEd0SXdvTHFDQXNRRDBuQUMyRlh4MVdoQ29hcS8weWRzeXJIYWhibVEzSWNjbDB3THBGd0s1TDFHMlVRb1hOYUg0c2hYM0dOS3BHSVZUYWhra2kzb0FOcTRBYTY1SUZMSEYwWlhJSXV3czJvQjdFWTBOQ1FQd2Q3akFSeitSQTZhekRkdGNtd2wzTXdnd2FrNldCYlFUSWhpeHJLUERUUlpOeUcwNExCdWFGMEZ4VWY4Q1B1M05sOGNyRjhScVZJWTV1NUVFeTBXWmx1NTJWUk5XeWhmOFc5Z1E4TTl2ZDRWM2ZhM3FIcXFtSm1kNzJlVjN6U0JYMmdUbU1xTTUyRDNuN0hCNlZFUHJ4YnhwV251akhHMHBIZmoyUzNzUFAweUg5V0tOMkx5YWNQL0wyKzA0QTFlQmJDZlhwc254dUVrWWpmVGVtV3Y3ZnZ0MVErYlcrNzFWYVdkMXN2VktXaElFRTlpZ2ZkZmIrbkVnWHVZYkhYNlhsS0pidlRhU3RPa0xwMitoTkk3YjUvdEFvQUFBPT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["ORGANIZATION"],"name":[1],"type":["chr"],"align":["left"]},{"label":["FISCAL YEAR OR LEGISLATIVE YEAR"],"name":[2],"type":["chr"],"align":["left"]},{"label":["ORGANIZATION CODE"],"name":[3],"type":["chr"],"align":["left"]},{"label":["PROGRAM"],"name":[4],"type":["chr"],"align":["left"]},{"label":["PROGRAM CODE"],"name":[5],"type":["chr"],"align":["left"]},{"label":["SORT SUBTOTAL DESCRIPTION"],"name":[6],"type":["chr"],"align":["left"]},{"label":["BUDGET OBJECT CLASS"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["SORT SEQUENCE"],"name":[8],"type":["chr"],"align":["left"]},{"label":["TRANSACTION DATE"],"name":[9],"type":["chr"],"align":["left"]},{"label":["DATA SOURCE"],"name":[10],"type":["chr"],"align":["left"]},{"label":["DOCUMENT"],"name":[11],"type":["chr"],"align":["left"]},{"label":["VENDOR NAME"],"name":[12],"type":["chr"],"align":["left"]},{"label":["VENDOR ID"],"name":[13],"type":["chr"],"align":["left"]},{"label":["PERFORM START DT"],"name":[14],"type":["chr"],"align":["left"]},{"label":["PERFORM END DT"],"name":[15],"type":["chr"],"align":["left"]},{"label":["DESCRIPTION"],"name":[16],"type":["chr"],"align":["left"]},{"label":["BUDGET OBJECT CODE"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["AMOUNT"],"name":[18],"type":["dbl"],"align":["right"]}],"data":[{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BAYLES CHRISTOPHER A.","13":"NA","14":"3-Jan-23","15":"31-Mar-23","16":"SHARED EMPLOYEE","17":"1101","18":"23266.67"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BEDNAR MARK M","13":"NA","14":"3-Jan-23","15":"30-Jan-23","16":"DIGITAL COMMUNICATIONS DIRECTO","17":"1101","18":"14000.00"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BEDNAR MARK M","13":"NA","14":"1-Feb-23","15":"31-Mar-23","16":"DIR OF STRATEGIC COMMUNICATION","17":"1101","18":"30000.00"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BERTOLINI STEVEN R.","13":"NA","14":"3-Jan-23","15":"28-Feb-23","16":"STAFF ASSISTANT","17":"1101","18":"9666.67"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BERTOLINI STEVEN R.","13":"NA","14":"1-Mar-23","15":"31-Mar-23","16":"OPERATIONS COORDINATOR","17":"1101","18":"5500.00"},{"1":"2023 OFFICE OF THE SPEAKER","2":"LY2023","3":"21SH202","4":"GENERAL EXPENDITURES","5":"EXPEN","6":"PERSONNEL COMPENSATION","7":"11","8":"DETAIL","9":"NA","10":"GL","11":"NA","12":"BIEN CHRISTOPHER A","13":"NA","14":"3-Jan-23","15":"30-Jan-23","16":"DIRECTOR OF OPERATIONS","17":"1101","18":"11900.00"}],"options":{"columns":{"min":{},"max":[10],"total":[18]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5fZnVsbF95ZWFyXzIwMjMgPC0gZnVsbF95ZWFyXzIwMjMgfD4gXG4gIGNsZWFuX25hbWVzKClcbmBgYCJ9 -->
+<pre class="r"><code>clean_full_year_2023 &lt;- full_year_2023 |&gt; 
+  clean_names()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2xlYW5fZnVsbF95ZWFyXzIwMjMgPC0gY2xlYW5fZnVsbF95ZWFyXzIwMjMgfD4gXG4gIG11dGF0ZShcbiAgICBzdGFydF9kYXRlID0gZG15KHBlcmZvcm1fc3RhcnRfZHQsIHF1aWV0ID0gVFJVRSksIFxuICAgIGVuZF9kYXRlID0gZG15KHBlcmZvcm1fZW5kX2R0LCBxdWlldCA9IFRSVUUpXG4gIClcbmBgYCJ9 -->
+<pre class="r"><code>clean_full_year_2023 &lt;- clean_full_year_2023 |&gt; 
+  mutate(
+    start_date = dmy(perform_start_dt, quiet = TRUE), 
+    end_date = dmy(perform_end_dt, quiet = TRUE)
+  )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuICBjbGVhbl9mdWxsX3llYXJfMjAyMyRidWRnZXRfb2JqZWN0X2NvZGUgPC0gYXMuY2hhcmFjdGVyKGNsZWFuX2Z1bGxfeWVhcl8yMDIzJGJ1ZGdldF9vYmplY3RfY29kZSlcbmBgYCJ9 -->
+<pre class="r"><code>  clean_full_year_2023$budget_object_code &lt;- as.character(clean_full_year_2023$budget_object_code)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Finding 1: Rep. Jack Bergman (R-Mich.) was the program’s top spender
+last year. He was reimbursed more than $32,000 for lodging and nearly
+$12,000 for meals in 2023, according to data released by the House as of
 Tuesday.</p>
+<p>Step 1: Filter for Bergman’s expenses. His organization name (2023
+HON. JACK BERGMAN) isn’t great for r because of the spacing and
+punctuation, so let’s use his organzation code: MI01BEJ.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVpbWJ1cnNlbWVudF9leHBlbnNlcyA8LSByZWFkLmNzdihcImNvbmdyZXNzX2RhdGEuY3N2XCIpXG5gYGAifQ== -->
-<pre class="r"><code>reimbursement_expenses &lt;- read.csv(&quot;congress_data.csv&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmVyZ21hbl9leHBlbnNlcyA8LSBjbGVhbl9mdWxsX3llYXJfMjAyMyB8PlxuICBmaWx0ZXIob3JnYW5pemF0aW9uX2NvZGUgPT0gXCJNSTAxQkVKXCIpIFxuXG5gYGAifQ== -->
+<pre class="r"><code>bergman_expenses &lt;- clean_full_year_2023 |&gt;
+  filter(organization_code == &quot;MI01BEJ&quot;) 
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Step 2: Make a new datagram filtering for Bergman’s personal travel
+and lodging expenses that he sought reimbursement for using budget codes
+2107 and 2109, which we identified as the relevant codes using this
+article: <a href="https://www.washingtonpost.com/politics/2024/06/13/house-expenses-receipts-database-list/" class="uri">https://www.washingtonpost.com/politics/2024/06/13/house-expenses-receipts-database-list/</a>.
+Make the result a little easier to read using select. (first dataframe
+probably not necessary, but helped us to think through the problem)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmVyZ21hbl9wcm9ncmFtX2V4cGVuc2VzIDwtIGJlcmdtYW5fZXhwZW5zZXMgfD5cbiAgc2VsZWN0KGRlc2NyaXB0aW9uLCBidWRnZXRfb2JqZWN0X2NvZGUsIGFtb3VudCwgc3RhcnRfZGF0ZSwgZW5kX2RhdGUpICB8PlxuICBmaWx0ZXIoYnVkZ2V0X29iamVjdF9jb2RlID09IFwiMjEwN1wiIHwgYnVkZ2V0X29iamVjdF9jb2RlID09IFwiMjEwOVwiKSBcbmBgYCJ9 -->
+<pre class="r"><code>bergman_program_expenses &lt;- bergman_expenses |&gt;
+  select(description, budget_object_code, amount, start_date, end_date)  |&gt;
+  filter(budget_object_code == &quot;2107&quot; | budget_object_code == &quot;2109&quot;) </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG9wX3JlaW1idXJzZW1lbnRfZXhwZW5zZXMgPC0gcmVpbWJ1cnNlbWVudF9leHBlbnNlcyB8PlxuICBmaWx0ZXIoRklTQ0FMLllFQVIuT1IuTEVHSVNMQVRJVkUuWUVBUiA9PSBcIkxZMjAyM1wiKSB8PlxuICBncm91cF9ieShPUkdBTklaQVRJT04pIHw+XG4gIHN1bW1hcmlzZShcbiAgICBBTU9VTlQgPSBzdW0oQU1PVU5UKVxuICApIHw+XG4gIGFycmFuZ2UoZGVzYyhBTU9VTlQpKVxuYGBgIn0= -->
-<pre class="r"><code>top_reimbursement_expenses &lt;- reimbursement_expenses |&gt;
-  filter(FISCAL.YEAR.OR.LEGISLATIVE.YEAR == &quot;LY2023&quot;) |&gt;
-  group_by(ORGANIZATION) |&gt;
-  summarise(
-    AMOUNT = sum(AMOUNT)
-  ) |&gt;
-  arrange(desc(AMOUNT))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG90YWxfYmVyZ21hbl9wcm9ncmFtX2V4cGVuc2VzIDwtIGJlcmdtYW5fcHJvZ3JhbV9leHBlbnNlcyB8PlxuICAgIGdyb3VwX2J5KGJ1ZGdldF9vYmplY3RfY29kZSkgfD5cbiAgICBzdW1tYXJpemUoXG4gICAgICAgIHRvdGFsX2Ftb3VudCA9IHN1bShhbW91bnQpXG4gICAgKVxuYGBgIn0= -->
+<pre class="r"><code>total_bergman_program_expenses &lt;- bergman_program_expenses |&gt;
+    group_by(budget_object_code) |&gt;
+    summarize(
+        total_amount = sum(amount)
+    )</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>NOTE: At this point we found that Bergman does not have any budget
+expenses recorded with these codes. We are not sure why. One possible
+explanation is that there are other codes besides the two shown in the
+article linked above. We contacted the author of the article (Clara Ence
+Morse) to ask if there are other codes we should look for. In the
+meantime, we moved on to finding #2.</p>
+<p>Finding #2: Rep. Matt Gaetz (R-Fla.) was the program’s second-highest
+overall spender, according to filings released as of Tuesday, with over
+$30,000 in lodging expenses and more than $11,000 for meals in 2023.</p>
+<p>Task 1: Create dataframe of just Gaetz’s expenses using filter. let’s
+use his organzation code: FL01GAM.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2FldHpfZXhwZW5zZXMgPC0gY2xlYW5fZnVsbF95ZWFyXzIwMjMgfD5cbiAgZmlsdGVyKG9yZ2FuaXphdGlvbl9jb2RlID09IFwiRkwwMUdBTVwiKVxuYGBgIn0= -->
+<pre class="r"><code>gaetz_expenses &lt;- clean_full_year_2023 |&gt;
+  filter(organization_code == &quot;FL01GAM&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Task 2:Make a new datagram filtering for Gaetz’s personal travel and
+lodging expenses that he sought reimbursement for using budget codes
+2107 and 2109, which we identified as the relevant codes using this
+article: <a href="https://www.washingtonpost.com/politics/2024/06/13/house-expenses-receipts-database-list/" class="uri">https://www.washingtonpost.com/politics/2024/06/13/house-expenses-receipts-database-list/</a>.
+Make the result a little easier to read using select. (first dataframe
+probably not necessary, but helped us to think through the problem)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2FldHpfcHJvZ3JhbV9leHBlbnNlcyA8LSBnYWV0el9leHBlbnNlc3w+XG4gIHNlbGVjdChkZXNjcmlwdGlvbiwgYnVkZ2V0X29iamVjdF9jb2RlLCBhbW91bnQsIHN0YXJ0X2RhdGUsIGVuZF9kYXRlKSAgfD5cbiAgZmlsdGVyKGJ1ZGdldF9vYmplY3RfY29kZSA9PSBcIjIxMDdcIiB8IGJ1ZGdldF9vYmplY3RfY29kZSA9PSBcIjIxMDlcIilcblxuYGBgIn0= -->
+<pre class="r"><code>gaetz_program_expenses &lt;- gaetz_expenses|&gt;
+  select(description, budget_object_code, amount, start_date, end_date)  |&gt;
+  filter(budget_object_code == &quot;2107&quot; | budget_object_code == &quot;2109&quot;)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Task 3: add up the total spending on meals and lodging.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2FldHpfcHJvZ3JhbV9leHBlbnNlcyB8PlxuICBncm91cF9ieShidWRnZXRfb2JqZWN0X2NvZGUpIHw+XG4gIHN1bW1hcml6ZShcbiAgICB0b3RhbF9hbW91bnQgPSBzdW0oYW1vdW50KVxuICApXG5gYGAifQ== -->
+<pre class="r"><code>gaetz_program_expenses |&gt;
+  group_by(budget_object_code) |&gt;
+  summarize(
+    total_amount = sum(amount)
+  )</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6Miwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIyIMOXIDIiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFBMTFRUVU3RE1CRGNKRTVRSTFwVjhJNUVsQ0lCdHg0UVJ3NElwTjRpeDNGRElMV2p4QUdPdklvLzhBdGUwckJPYkluYWx4M1BlbWE5ODNpM1hjZmJHQUFDSU1TRElFUUk0ZlBUZlhJRFFIeThlRUJncHVzblBqcEhvTW5sV0tjR3VWeGRYUC9EdDFnWHVyLzUvZjdTZHB1ZkI1ak9rV0VvNko1M2p0bFozaGNsVjVuTVh6bFRHWk1GTjUxVEpSV3RNN3FYdlZDTzFheVZINm0xbTJzN1BYZ1lob003azlXMHN6TXRHUmRVMFhUWG9oNXZydVJFTnFxU0FrVyszajV5eEY3ckVNdGU2SjhVQ1h2cHhWdHl0WGI2UVNOS1BYU2twak0zMkQvRytoditZT1NSa1VkY2xKV3dvWVExelhsdG5RditidUFDQXhuelNKdTJ3cmpNb3NoMjZaaWpaWmlzTFRPdURvYy9HT09BaEJNQ0FBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["budget_object_code"],"name":[1],"type":["chr"],"align":["left"]},{"label":["total_amount"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"2107","2":"34228"},{"1":"2109","2":"12956"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTkFcbmBgYCJ9 -->
+<pre class="r"><code>NA</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>NOTE: these results are close to the numbers from the article (“over
+$30,000 in lodging expenses and more than $11,000 for meals in 2023”),
+but not quite the same. This could be because we need to include other
+budget object codes (BOC), or because there is some error in the data
+that we downloaded or that we created while cleaning the data. We hope
+that when we resolve the BOC question we will be closer to an
+answer.</p>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiZGF0YV9wcm9qZWN0LlJtZCIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBpcyBhbiBbUiBNYXJrZG93bl0oaHR0cDovL3JtYXJrZG93bi5yc3R1ZGlvLmNvbSkgTm90ZWJvb2suIFdoZW4geW91IGV4ZWN1dGUgY29kZSB3aXRoaW4gdGhlIG5vdGVib29rLCB0aGUgcmVzdWx0cyBhcHBlYXIgYmVuZWF0aCB0aGUgY29kZS4gCgpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ21kK1NoaWZ0K0VudGVyKi4gCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShsdWJyaWRhdGUpCmxpYnJhcnkocmVmaW5yKQpsaWJyYXJ5KGphbml0b3IpCmxpYnJhcnkoZHBseXIpCmBgYAoKUmVwLiBKYWNrIEJlcmdtYW4gKFItTWljaC4pIHdhcyB0aGUgcHJvZ3JhbeKAmXMgdG9wIHNwZW5kZXIgbGFzdCB5ZWFyLiBIZSB3YXMgcmVpbWJ1cnNlZCBtb3JlIHRoYW4gJDMyLDAwMCBmb3IgbG9kZ2luZyBhbmQgbmVhcmx5ICQxMiwwMDAgZm9yIG1lYWxzIGluIDIwMjMsIGFjY29yZGluZyB0byBkYXRhIHJlbGVhc2VkIGJ5IHRoZSBIb3VzZSBhcyBvZiBUdWVzZGF5LgoKCmBgYHtyfQpyZWltYnVyc2VtZW50X2V4cGVuc2VzIDwtIHJlYWQuY3N2KCJjb25ncmVzc19kYXRhLmNzdiIpCmBgYAoKCmBgYHtyfQp0b3BfcmVpbWJ1cnNlbWVudF9leHBlbnNlcyA8LSByZWltYnVyc2VtZW50X2V4cGVuc2VzIHw+CiAgZmlsdGVyKEZJU0NBTC5ZRUFSLk9SLkxFR0lTTEFUSVZFLllFQVIgPT0gIkxZMjAyMyIpIHw+CiAgZ3JvdXBfYnkoT1JHQU5JWkFUSU9OKSB8PgogIHN1bW1hcmlzZSgKICAgIEFNT1VOVCA9IHN1bShBTU9VTlQpCiAgKSB8PgogIGFycmFuZ2UoZGVzYyhBTU9VTlQpKQpgYGAKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBpcyBhbiBbUiBNYXJrZG93bl0oaHR0cDovL3JtYXJrZG93bi5yc3R1ZGlvLmNvbSkgTm90ZWJvb2suIFdoZW4geW91IGV4ZWN1dGUgY29kZSB3aXRoaW4gdGhlIG5vdGVib29rLCB0aGUgcmVzdWx0cyBhcHBlYXIgYmVuZWF0aCB0aGUgY29kZS4KClRyeSBleGVjdXRpbmcgdGhpcyBjaHVuayBieSBjbGlja2luZyB0aGUgKlJ1biogYnV0dG9uIHdpdGhpbiB0aGUgY2h1bmsgb3IgYnkgcGxhY2luZyB5b3VyIGN1cnNvciBpbnNpZGUgaXQgYW5kIHByZXNzaW5nICpDbWQrU2hpZnQrRW50ZXIqLgoKVGFzayAxOiBMb2FkIGxpYnJhcmllcyBhbmQgZXN0YWJsaXNoIHNldHRpbmdzOgoKYHtyfSBzZXR1cCwgaW5jbHVkZT1GQUxTRX0ga25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKWAKCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShsdWJyaWRhdGUpCmxpYnJhcnkoamFuaXRvcikKYGBgCgpUYXNrIDI6IGxvYWQgZGF0YQoKYGBge3J9CnF1YXJ0ZXJfb25lIDwtIHJlYWRfY3N2KCJkYXRhL0pBTi1NQVItMjAyMy1TT0QuY3N2IikKcXVhcnRlcl90d28gPC0gcmVhZF9jc3YoImRhdGEvQVBSSUwtSlVORSAyMDIzIFNPRC5jc3YiKQpxdWFydGVyX3RocmVlIDwtIHJlYWRfY3N2KCJkYXRhL0pVTFktU0VQVEVNQkVSLTIwMjNTT0QuY3N2IikKcXVhcnRlcl9mb3VyIDwtIHJlYWRfY3N2KCJkYXRhL09DVC1ERUMtMjAyMy1TT0QuY3N2IikKcXVhcnRlcl9maXZlIDwtIHJlYWRfY3N2KCJkYXRhL0pBTi1NQVItMjAyNC1TT0QtREVUQUlMLUdSSUQtRklOQUwuY3N2IikKYGBgCgpUYXNrIDM6IEZpeCB0aGUgcGFyc2luZyBlcnJvciB3aXRoIHF1YXJ0ZXJfdGhyZWUgY3N2IGJ5IGRlbGV0aW5nIHRoZSBleHRyYSBjb2x1bW4uCgpgYGB7cn0KcXVhcnRlcl90aHJlZSA8LSByZWFkX2NzdigiZGF0YS9KVUxZLVNFUFRFTUJFUi0yMDIzU09ELmNzdiIpCgpgYGAKCmBgYHtyfQpwcm9ibGVtcyhxdWFydGVyX3RocmVlKQpgYGAKCmBgYHtyfQpoZWFkKHF1YXJ0ZXJfdGhyZWUpCmBgYAoKYGBge3J9CnF1YXJ0ZXJfdGhyZWVfZml4ZWQgPC0gcXVhcnRlcl90aHJlZSB8PgogIHNlbGVjdCgtLi4uMTkpCmBgYAoKVGFzayA0OiBiaW5kIHRoZSBkYXRhZnJhbWVzIHNvIHdlIGhhdmUgb25lIHllYXIncyB3b3J0aCBvZiBkYXRhCgpgYGB7cn0KZnVsbF95ZWFyXzIwMjMgPC0gYmluZF9yb3dzKGxpc3QocXVhcnRlcl9vbmUsIHF1YXJ0ZXJfdHdvLCBxdWFydGVyX3RocmVlX2ZpeGVkLCBxdWFydGVyX2ZvdXIsIHF1YXJ0ZXJfZml2ZSkpCnZpZXcoZnVsbF95ZWFyXzIwMjMpCmBgYAoKVGFzayA1OiBjbGVhbiB1cCBkYXRhLiBGaXggaGVhZGVycyB1c2luZyBqYW5pdG9yLCBmaXggZGF0YXR5cGUgZm9yIGRhdGVzIGFuZCBidWRnZXQgb2JqZWN0IGNvZGVzLgoKYGBge3J9CmhlYWQoZnVsbF95ZWFyXzIwMjMpIApgYGAKCmBgYHtyfQpjbGVhbl9mdWxsX3llYXJfMjAyMyA8LSBmdWxsX3llYXJfMjAyMyB8PiAKICBjbGVhbl9uYW1lcygpCmBgYAoKYGBge3J9CmNsZWFuX2Z1bGxfeWVhcl8yMDIzIDwtIGNsZWFuX2Z1bGxfeWVhcl8yMDIzIHw+IAogIG11dGF0ZSgKICAgIHN0YXJ0X2RhdGUgPSBkbXkocGVyZm9ybV9zdGFydF9kdCwgcXVpZXQgPSBUUlVFKSwgCiAgICBlbmRfZGF0ZSA9IGRteShwZXJmb3JtX2VuZF9kdCwgcXVpZXQgPSBUUlVFKQogICkKYGBgCgoKYGBge3J9CiAgY2xlYW5fZnVsbF95ZWFyXzIwMjMkYnVkZ2V0X29iamVjdF9jb2RlIDwtIGFzLmNoYXJhY3RlcihjbGVhbl9mdWxsX3llYXJfMjAyMyRidWRnZXRfb2JqZWN0X2NvZGUpCmBgYAoKRmluZGluZyAxOiBSZXAuIEphY2sgQmVyZ21hbiAoUi1NaWNoLikgd2FzIHRoZSBwcm9ncmFt4oCZcyB0b3Agc3BlbmRlciBsYXN0IHllYXIuIEhlIHdhcyByZWltYnVyc2VkIG1vcmUgdGhhbiBcJDMyLDAwMCBmb3IgbG9kZ2luZyBhbmQgbmVhcmx5IFwkMTIsMDAwIGZvciBtZWFscyBpbiAyMDIzLCBhY2NvcmRpbmcgdG8gZGF0YSByZWxlYXNlZCBieSB0aGUgSG91c2UgYXMgb2YgVHVlc2RheS4KClN0ZXAgMTogRmlsdGVyIGZvciBCZXJnbWFuJ3MgZXhwZW5zZXMuIEhpcyBvcmdhbml6YXRpb24gbmFtZSAoMjAyMyBIT04uIEpBQ0sgQkVSR01BTikgaXNuJ3QgZ3JlYXQgZm9yIHIgYmVjYXVzZSBvZiB0aGUgc3BhY2luZyBhbmQgcHVuY3R1YXRpb24sIHNvIGxldCdzIHVzZSBoaXMgb3JnYW56YXRpb24gY29kZTogTUkwMUJFSi4gCgoKYGBge3J9CmJlcmdtYW5fZXhwZW5zZXMgPC0gY2xlYW5fZnVsbF95ZWFyXzIwMjMgfD4KICBmaWx0ZXIob3JnYW5pemF0aW9uX2NvZGUgPT0gIk1JMDFCRUoiKSAKCmBgYAoKU3RlcCAyOiBNYWtlIGEgbmV3IGRhdGFncmFtIGZpbHRlcmluZyBmb3IgQmVyZ21hbidzIHBlcnNvbmFsIHRyYXZlbCBhbmQgbG9kZ2luZyBleHBlbnNlcyB0aGF0IGhlIHNvdWdodCByZWltYnVyc2VtZW50IGZvciB1c2luZyBidWRnZXQgY29kZXMgMjEwNyBhbmQgMjEwOSwgd2hpY2ggd2UgaWRlbnRpZmllZCBhcyB0aGUgcmVsZXZhbnQgY29kZXMgdXNpbmcgdGhpcyBhcnRpY2xlOiBodHRwczovL3d3dy53YXNoaW5ndG9ucG9zdC5jb20vcG9saXRpY3MvMjAyNC8wNi8xMy9ob3VzZS1leHBlbnNlcy1yZWNlaXB0cy1kYXRhYmFzZS1saXN0Ly4gTWFrZSB0aGUgcmVzdWx0IGEgbGl0dGxlIGVhc2llciB0byByZWFkIHVzaW5nIHNlbGVjdC4gKGZpcnN0IGRhdGFmcmFtZSBwcm9iYWJseSBub3QgbmVjZXNzYXJ5LCBidXQgaGVscGVkIHVzIHRvIHRoaW5rIHRocm91Z2ggdGhlIHByb2JsZW0pCgoKYGBge3J9CmJlcmdtYW5fcHJvZ3JhbV9leHBlbnNlcyA8LSBiZXJnbWFuX2V4cGVuc2VzIHw+CiAgc2VsZWN0KGRlc2NyaXB0aW9uLCBidWRnZXRfb2JqZWN0X2NvZGUsIGFtb3VudCwgc3RhcnRfZGF0ZSwgZW5kX2RhdGUpICB8PgogIGZpbHRlcihidWRnZXRfb2JqZWN0X2NvZGUgPT0gIjIxMDciIHwgYnVkZ2V0X29iamVjdF9jb2RlID09ICIyMTA5IikgCmBgYAoKYGBge3J9CnRvdGFsX2JlcmdtYW5fcHJvZ3JhbV9leHBlbnNlcyA8LSBiZXJnbWFuX3Byb2dyYW1fZXhwZW5zZXMgfD4KICAgIGdyb3VwX2J5KGJ1ZGdldF9vYmplY3RfY29kZSkgfD4KICAgIHN1bW1hcml6ZSgKICAgICAgICB0b3RhbF9hbW91bnQgPSBzdW0oYW1vdW50KQogICAgKQpgYGAKCgoKTk9URTogQXQgdGhpcyBwb2ludCB3ZSBmb3VuZCB0aGF0IEJlcmdtYW4gZG9lcyBub3QgaGF2ZSBhbnkgYnVkZ2V0IGV4cGVuc2VzIHJlY29yZGVkIHdpdGggdGhlc2UgY29kZXMuIFdlIGFyZSBub3Qgc3VyZSB3aHkuIE9uZSBwb3NzaWJsZSBleHBsYW5hdGlvbiBpcyB0aGF0IHRoZXJlIGFyZSBvdGhlciBjb2RlcyBiZXNpZGVzIHRoZSB0d28gc2hvd24gaW4gdGhlIGFydGljbGUgbGlua2VkIGFib3ZlLiBXZSBjb250YWN0ZWQgdGhlIGF1dGhvciBvZiB0aGUgYXJ0aWNsZSAoQ2xhcmEgRW5jZSBNb3JzZSkgdG8gYXNrIGlmIHRoZXJlIGFyZSBvdGhlciBjb2RlcyB3ZSBzaG91bGQgbG9vayBmb3IuIEluIHRoZSBtZWFudGltZSwgd2UgbW92ZWQgb24gdG8gZmluZGluZyAjMi4gCgoKRmluZGluZyAjMjogUmVwLiBNYXR0IEdhZXR6IChSLUZsYS4pIHdhcyB0aGUgcHJvZ3JhbeKAmXMgc2Vjb25kLWhpZ2hlc3Qgb3ZlcmFsbCBzcGVuZGVyLCBhY2NvcmRpbmcgdG8gZmlsaW5ncyByZWxlYXNlZCBhcyBvZiBUdWVzZGF5LCB3aXRoIG92ZXIgJDMwLDAwMCBpbiBsb2RnaW5nIGV4cGVuc2VzIGFuZCBtb3JlIHRoYW4gJDExLDAwMCBmb3IgbWVhbHMgaW4gMjAyMy4KClRhc2sgMTogQ3JlYXRlIGRhdGFmcmFtZSBvZiBqdXN0IEdhZXR6J3MgZXhwZW5zZXMgdXNpbmcgZmlsdGVyLiBsZXQncyB1c2UgaGlzIG9yZ2FuemF0aW9uIGNvZGU6IEZMMDFHQU0uCgpgYGB7cn0KZ2FldHpfZXhwZW5zZXMgPC0gY2xlYW5fZnVsbF95ZWFyXzIwMjMgfD4KICBmaWx0ZXIob3JnYW5pemF0aW9uX2NvZGUgPT0gIkZMMDFHQU0iKQpgYGAKClRhc2sgMjpNYWtlIGEgbmV3IGRhdGFncmFtIGZpbHRlcmluZyBmb3IgR2FldHoncyBwZXJzb25hbCB0cmF2ZWwgYW5kIGxvZGdpbmcgZXhwZW5zZXMgdGhhdCBoZSBzb3VnaHQgcmVpbWJ1cnNlbWVudCBmb3IgdXNpbmcgYnVkZ2V0IGNvZGVzIDIxMDcgYW5kIDIxMDksIHdoaWNoIHdlIGlkZW50aWZpZWQgYXMgdGhlIHJlbGV2YW50IGNvZGVzIHVzaW5nIHRoaXMgYXJ0aWNsZTogaHR0cHM6Ly93d3cud2FzaGluZ3RvbnBvc3QuY29tL3BvbGl0aWNzLzIwMjQvMDYvMTMvaG91c2UtZXhwZW5zZXMtcmVjZWlwdHMtZGF0YWJhc2UtbGlzdC8uIE1ha2UgdGhlIHJlc3VsdCBhIGxpdHRsZSBlYXNpZXIgdG8gcmVhZCB1c2luZyBzZWxlY3QuIChmaXJzdCBkYXRhZnJhbWUgcHJvYmFibHkgbm90IG5lY2Vzc2FyeSwgYnV0IGhlbHBlZCB1cyB0byB0aGluayB0aHJvdWdoIHRoZSBwcm9ibGVtKQoKYGBge3J9CmdhZXR6X3Byb2dyYW1fZXhwZW5zZXMgPC0gZ2FldHpfZXhwZW5zZXN8PgogIHNlbGVjdChkZXNjcmlwdGlvbiwgYnVkZ2V0X29iamVjdF9jb2RlLCBhbW91bnQsIHN0YXJ0X2RhdGUsIGVuZF9kYXRlKSAgfD4KICBmaWx0ZXIoYnVkZ2V0X29iamVjdF9jb2RlID09ICIyMTA3IiB8IGJ1ZGdldF9vYmplY3RfY29kZSA9PSAiMjEwOSIpCgpgYGAKClRhc2sgMzogYWRkIHVwIHRoZSB0b3RhbCBzcGVuZGluZyBvbiBtZWFscyBhbmQgbG9kZ2luZy4KCmBgYHtyfQpnYWV0el9wcm9ncmFtX2V4cGVuc2VzIHw+CiAgZ3JvdXBfYnkoYnVkZ2V0X29iamVjdF9jb2RlKSB8PgogIHN1bW1hcml6ZSgKICAgIHRvdGFsX2Ftb3VudCA9IHN1bShhbW91bnQpCiAgKQogIApgYGAKTk9URTogdGhlc2UgcmVzdWx0cyBhcmUgY2xvc2UgdG8gdGhlIG51bWJlcnMgZnJvbSB0aGUgYXJ0aWNsZSAoIm92ZXIgJDMwLDAwMCBpbiBsb2RnaW5nIGV4cGVuc2VzIGFuZCBtb3JlIHRoYW4gJDExLDAwMCBmb3IgbWVhbHMgaW4gMjAyMyIpLCBidXQgbm90IHF1aXRlIHRoZSBzYW1lLiBUaGlzIGNvdWxkIGJlIGJlY2F1c2Ugd2UgbmVlZCB0byBpbmNsdWRlIG90aGVyIGJ1ZGdldCBvYmplY3QgY29kZXMgKEJPQyksIG9yIGJlY2F1c2UgdGhlcmUgaXMgc29tZSBlcnJvciBpbiB0aGUgZGF0YSB0aGF0IHdlIGRvd25sb2FkZWQgb3IgdGhhdCB3ZSBjcmVhdGVkIHdoaWxlIGNsZWFuaW5nIHRoZSBkYXRhLiBXZSBob3BlIHRoYXQgd2hlbiB3ZSByZXNvbHZlIHRoZSBCT0MgcXVlc3Rpb24gd2Ugd2lsbCBiZSBjbG9zZXIgdG8gYW4gYW5zd2VyLgoK</div>
 
 
 
