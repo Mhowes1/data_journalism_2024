@@ -141,3 +141,34 @@ gaetz_program_expenses |>
 ```
 NOTE: these results are close to the numbers from the article ("over $30,000 in lodging expenses and more than $11,000 for meals in 2023"), but not quite the same. This could be because we need to include other budget object codes (BOC), or because there is some error in the data that we downloaded or that we created while cleaning the data. We hope that when we resolve the BOC question we will be closer to an answer.
 
+Finding 3: Swalwell, who purchased a $1,215,000 home in the Eckington neighborhood of Washington, was reimbursed more than $20,000 for lodging expenses in 2023, according to the data released as of Tuesday. In May 2023, he received $2,838 in lodging reimbursement. 
+
+Step 1: Find the total lodging number
+
+```{r}
+Swalwell_expenses <- clean_full_year_2023 |>
+  filter(organization_code == "CA15SWE")
+```
+
+```{r}
+Swalwell_program_expenses <- Swalwell_expenses|>
+  select(description, budget_object_code, amount, start_date, end_date)  |>
+  filter(budget_object_code == "2107")
+```
+
+```{r}
+Swalwell_program_expenses |>
+  group_by(budget_object_code) |>
+  summarize(
+    total_amount = sum(amount)
+  )
+```
+Step 2: Narrow down the data to May 2023. 
+
+```{r}
+Swalwell_program_expenses |>
+  group_by(start_date, end_date) |>
+  summarize(
+    total_amount = sum(amount)
+  )
+```
