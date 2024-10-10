@@ -172,3 +172,76 @@ Swalwell_program_expenses |>
     total_amount = sum(amount)
   )
 ```
+No. 4: Mace, who co-owns a $1,649,000 Capitol Hill townhouse she purchased in 2021 with her then-fiancé, Patrick Bryant, expensed a total of $27,817 in 2023, an average of more than $2,300 a month, according to the data released as of Tuesday. She expensed over $3,000 for lodging in January, March and May, and over $4,000 for lodging in October.
+
+Step 1: Consolidate the data to just be Mace's data. Code: SC01MAN 
+
+```{r}
+mace_expenses <- clean_full_year_2023 |>
+  filter(organization_code == "SC01MAN")
+```
+
+```{r}
+mace_program_expenses <- mace_expenses |>
+  select(description, budget_object_code, amount, start_date, end_date) |>
+  filter(budget_object_code == "2107" | budget_object_code == "2109") |>
+  filter(lubridate::year(start_date) == 2023) |>
+  group_by(budget_object_code) |>
+  summarize(
+    total_amount = sum(amount)
+  ) 
+```
+
+```{r}
+mace_program_expenses
+```
+
+
+
+
+This shows that Mace expensed $27,817.00 on lodging in 2023, aligning with the Washington Post story. By dividing the figure by 12 (months in the year), you receive an average of $2,318, matching the Washington Post story.
+
+Step 2: Next, we want to see the monthly totals for January, March, May and October. 
+
+```{r}
+mace_expenses |>
+  group_by(start_date, end_date) |>
+  filter(budget_object_code == "2107") |>
+  summarize(
+    total_amount = sum(amount)
+  )
+```
+
+
+
+
+The table shows that Mace expensed $3,196 in January 2023, $3,354 in March 2023, $3,612 in May 2023 and $4,176 in October. All these figures match the Washington Post story.
+
+
+No. 5: Some members of Congress who own homes in the Washington area, including Reps. Patrick T. McHenry (R-N.C.), Ro Khanna (D-Calif.) and Michael McCaul (R-Tex.), have chosen not to participate in the program at all. Rep. Jim Banks (R-Ind.), who owns a $1 million home in Virginia, was reimbursed less than $1,500 each month.
+
+
+Step 1: I want to make it just Rep. Banks' data, so I will isolate his from the other congresspeople. Code: IN03BAJ
+
+
+```{r}
+banks_expenses <- clean_full_year_2023 |>
+  filter(organization_code == "IN03BAJ")
+```
+
+Step 2: Next I want to make sure that the budget object codes are just for the lodging and meals. I also will group it by the start_date and end_date to see the monthly totals and determine if it matches the Washington Post story. 
+
+```{r}
+banks_expenses |>
+  group_by(start_date, end_date) |>
+  filter(budget_object_code == "2107" | budget_object_code == "2109") |>
+  summarize(
+    total_amount = sum(amount)
+  )
+```
+
+The table confirms that Banks did not recieve more than $1,500 a month in 2023, with his highest total being $1,463.02 in June. 	
+
+
+
+
