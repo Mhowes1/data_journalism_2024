@@ -240,7 +240,7 @@ banks_expenses |>
   )
 ```
 
-The table confirms that Banks did not recieve more than $1,500 a month in 2023, with his highest total being $1,463.02 in June. 	
+The table confirms that Banks did not receive more than $1,500 a month in 2023, with his highest total being $1,463.02 in June. 	
 
 
 
