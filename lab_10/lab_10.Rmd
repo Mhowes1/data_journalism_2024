@@ -1,0 +1,262 @@
+---
+title: "lab_10"
+author: "Michael Howes"
+date: "2024-11-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## You will need
+
+-   the tidyverse, janitor and tigris libraries
+-   you might choose to use the tidycensus library for Q3
+
+## Load libraries and establish settings
+
+**Task** Create a codeblock and load appropriate packages and settings for this lab.
+
+```{r}
+# Turn off scientific notation
+options(scipen=999)
+
+library(tidyverse)
+library(sf)
+library(janitor)
+library(tigris)
+```
+
+Let's explore the election results from last night and make some maps!
+
+## Questions
+
+**Q1.** Make a county-level map of Maryland's results for U.S. Senate using `md_senate_county_24.csv` in the data folder, calculating the difference between Angela Alsobrooks's percentage of the total votes and Larry Hogan's percentage of the total votes and displaying that percentage difference on the map. What is the story here, and what is the county with the most interesting results?
+
+**Hogan needed to perform. well in the unaffiliated belt of Howard, Anne Arundel and Frederick counties to have a shot at winning. While he did perform better in Frederick and Anne Arundel county, those performances were vastly overshadowed by Alsobrooks' performances in Montgomery and Prince George's counties, the most populated counties in Maryland. **
+
+```{r}
+senate_24_data <- st_read("data/md_senate_county_24.csv")
+
+glimpse(senate_24_data)
+
+```
+
+
+
+```{r}
+senate_percentages <- senate_24_data |>
+  mutate(
+    Alsobrooks = as.numeric(Alsobrooks),
+    Hogan = as.numeric(Hogan),
+    Scott = as.numeric(Scott),
+    Alsobrooks_pct = Alsobrooks / (Alsobrooks + Hogan + Scott) * 100,
+    Hogan_pct = Hogan / (Alsobrooks + Hogan + Scott) * 100,
+    pct_diff = Alsobrooks_pct - Hogan_pct
+  )
+```
+
+```{r}
+md_counties <- counties() |> 
+filter(STATEFP == "24")
+
+```
+
+```{r}
+senate_map_data <- md_counties |>
+ left_join(senate_percentages, by = c("GEOID"))
+```
+
+```{r}
+senate_map_data |>
+  ggplot() +
+  geom_sf() +
+  theme_minimal()
+```
+
+```{r}
+ggplot(senate_map_data) +
+  geom_sf(aes(fill = pct_diff)) +  
+  scale_fill_gradient2(
+    low = "blue", 
+    mid = "red",  
+    high = "pink",     
+    midpoint = 0,      
+    name = "Alsobrooks - Hogan % Difference"
+  ) +
+  labs(
+    title = "Alsobrooks outperforms Hogan in MD",
+    fill = "Number of vote difference"
+  ) +  
+  theme_minimal() 
+```
+
+
+**Q2.** Make a county-level map showing the difference between Donald Trump's county-level performance this year and Larry Hogan's, using percentages to compare the two as you did in Q1. You can use the dataframe you initially loaded for Q1, and you'll need to load the 2024 presidential results in the data folder and join them to it before proceeding. Are there any counties where Trump got a higher percentage than Hogan? How would you describe the map showing the Trump-Hogan difference?
+
+Also answer this: is a map the best way to present this data? What else could you make that might convey more information?
+
+**Hogan outperformed Trump in every single county except for one in Maryland. Trump's margin over Hogan in that county was very slim. A bar chart could possibly illustrate the differences in the counties better. It would show the percentage of votes that Hogan recieved vs Trump's percentage. This would be better than just the percent difference between the two. **
+
+```{r}
+pres_24_data <- st_read("data/md_pres_county_24.csv")
+
+glimpse(pres_24_data)
+
+```
+```{r}
+trump_percentage <- pres_24_data |>
+  mutate(
+    Trump = as.numeric(Trump),
+    Harris = as.numeric(Harris),
+    Kennedy = as.numeric(Kennedy),
+    Stein = as.numeric(Stein),
+    Oliver = as.numeric(Oliver),
+    Trump_pct = Trump / (Harris + Trump + Oliver + Stein + Kennedy) * 100,
+  )
+```
+
+```{r}
+trump_hogan_map_data <- senate_map_data |>
+ left_join(trump_percentage, by = c("GEOID")) |>
+  select(-pct_diff)|>
+  mutate(
+    pct_diff = Hogan_pct - Trump_pct
+  )
+```
+
+```{r}
+ggplot(trump_hogan_map_data) +
+  geom_sf(aes(fill = pct_diff)) +  
+  scale_fill_gradient2(
+    low = "blue", 
+    mid = "white",  
+    high = "purple",     
+    midpoint = 0,      
+    name = "Hogan - Trump % Difference"
+  ) +
+  labs(
+    title = "Hogan outperforms Trump in MD",
+    fill = "Number of vote difference"
+  ) +
+  theme_minimal() 
+```
+
+
+**Q3** Make another map showing the difference between Larry Hogan's county-level performance this year and from his governor race in 2018, using percentages to compare the two as you did in Q2. You can use the dataframe you initially loaded for Q1, and you'll need to load the 2018 governor results in the data folder and join them to it before proceeding. Are there any counties where Hogan did better this year? How would you describe the map showing the difference?
+
+**There wasn't a single county where Hogan performed better in 2024 than in 2018. The maps shows these changes, with 22 counties showing Hogan performing five percentage points higher six years ago with a orange or red hue. Hogan performed 10 or more percentage points better in 13 counties. **
+
+```{r}
+gov_18_data <- st_read("data/md_gov_county_18.csv")
+
+glimpse(gov_18_data)
+
+```
+
+```{r}
+gov_18_percentage <- gov_18_data |>
+  mutate(
+    Hogan = as.numeric(Hogan),
+    Jealous = as.numeric(Jealous),
+    Quinn = as.numeric(Quinn),
+    Schlakman = as.numeric(Schlakman),
+    Write.ins = as.numeric(Write.ins),
+    Hogan_18_pct = Hogan / (Hogan + Jealous + Quinn + Schlakman + Write.ins) * 100,
+  )
+```
+
+```{r}
+hogan_maps_data <- senate_map_data |>
+ left_join(gov_18_percentage, by = c("GEOID")) |>
+  select(-pct_diff)|>
+  mutate(
+    pct_diff = Hogan_18_pct - Hogan_pct
+  )
+```
+
+```{r}
+ggplot(hogan_maps_data) +
+  geom_sf(aes(fill = pct_diff)) +  
+  scale_fill_gradient2(
+    low = "orange", 
+    mid = "white",  
+    high = "red",     
+    midpoint = 0,      
+    name = "Hogan % difference from 2018 to 2024"
+  ) +
+  labs(
+    title = "Hogan underperformed in 2024 compared to 2018",
+    fill = "Number of vote difference"
+  ) +
+  theme_minimal() 
+```
+
+**Q4.** Choose your own map adventure! In the data folder I've included Maryland county-level results for the abortion rights amendment vote this year, plus the 2020 presidential results by county and 2022 governor's results by county. Using one of those and at least one other contest for comparison, make a county-level map showing what you think is the most interesting aspect of that data, and describe the results in terms of a possible story. You can bring in other data, such as Census information, if you like.
+
+**I decided to make a county-level map showing the percent difference in votes between Joe Biden's 2020 campaign and Kamala Harris' 2024 campaign. I found that Biden outperformed Harris in every single county. This is despite Harris being the replacement for Biden, with the Democratic Party believing that Harris would be a stronger candidate with just over 100 days to campaign. It's be interesting to talk to voters in Somerset, Dorcestor, Cecil and Montgomery county where these voting trends were highest.**
+
+```{r}
+pres_20_data <- st_read("data/md_pres_county_20.csv")
+
+glimpse(pres_20_data)
+
+```
+
+
+
+```{r}
+pres_20_percentages <- pres_20_data |>
+  mutate(
+    Trump = as.numeric(Trump),
+    Biden = as.numeric(Biden),
+    Jorgensen = as.numeric(Jorgensen),
+    Hawkins = as.numeric(Hawkins),
+    Segal = as.numeric(Segal),
+    Biden_pct = Biden / (Biden + Trump + Jorgensen + Hawkins + Segal) * 100,
+  )
+```
+
+
+```{r}
+pres_map_data <- md_counties |>
+ left_join(pres_20_percentages, by = c("GEOID"))
+```
+
+```{r}
+Kamala_percentage <- pres_24_data |>
+  mutate(
+    Trump = as.numeric(Trump),
+    Harris = as.numeric(Harris),
+    Kennedy = as.numeric(Kennedy),
+    Stein = as.numeric(Stein),
+    Oliver = as.numeric(Oliver),
+    Harris_pct = Harris / (Harris + Trump + Oliver + Stein + Kennedy) * 100,
+  )
+```
+
+```{r}
+Biden_Harris_data <- pres_map_data |>
+ left_join(Kamala_percentage, by = c("GEOID")) |>
+  mutate(
+    pct_diff = Biden_pct - Harris_pct
+  )
+```
+
+```{r}
+ggplot(Biden_Harris_data) +
+  geom_sf(aes(fill = pct_diff)) +  
+  scale_fill_gradient2(
+    low = "blue", 
+    mid = "white",  
+    high = "orange",     
+    midpoint = 0,      
+    name = "Biden 2020 - Harris 2024 % Difference"
+  ) +
+  labs(
+    title = "Joe Biden outperformed Kamala Harris in every county in Maryland",
+    fill = "Number of vote difference"
+  ) +
+  theme_minimal() 
+```
