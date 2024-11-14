@@ -1,0 +1,39 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+# Turn off scientific notation
+options(scipen=999)
+
+library(tidyverse)
+library(sf)
+library(janitor)
+library(tigris)
+```
+
+
+
+
+```{r}
+md_senate_contributions <- read_csv("data/md_senate_contributions.csv") |>
+  
+  print(column_names)
+  
+```
+
+
+```{r}
+cleaned_data<- md_senate_contributions|>
+  
+  select( -unused_contbr_id, -committee_name...9, -recipient_committee_org_type, -contributor_suffix, -contributor_street_2, -contributor_id, -memo_code, -memo_code_full, -candidate_id, -candidate_name, -candidate_first_name, -candidate_last_name, -candidate_middle_name, -candidate_prefix, -candidate_suffix, -candidate_office, -candidate_office_full, -candidate_office_state, -candidate_office_state_full, -candidate_office_district, -conduit_committee_id, -conduit_committee_name, -conduit_committee_street1, -conduit_committee_street2, -conduit_committee_city, -conduit_committee_state, -conduit_committee_zip, -donor_committee_name, -national_committee_nonfederal_account, -election_type_full, -increased_limit, -is_individual) |>
+    rename(committee_name = `committee_name...2`) |>
+  
+  print(column_names)
+  
+```
+
+
