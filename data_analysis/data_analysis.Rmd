@@ -27,13 +27,38 @@ md_senate_contributions <- read_csv("data/md_senate_contributions.csv") |>
 
 
 ```{r}
-cleaned_data<- md_senate_contributions|>
+cleaned_data <- md_senate_contributions |>
   
-  select( -unused_contbr_id, -committee_name...9, -recipient_committee_org_type, -contributor_suffix, -contributor_street_2, -contributor_id, -memo_code, -memo_code_full, -candidate_id, -candidate_name, -candidate_first_name, -candidate_last_name, -candidate_middle_name, -candidate_prefix, -candidate_suffix, -candidate_office, -candidate_office_full, -candidate_office_state, -candidate_office_state_full, -candidate_office_district, -conduit_committee_id, -conduit_committee_name, -conduit_committee_street1, -conduit_committee_street2, -conduit_committee_city, -conduit_committee_state, -conduit_committee_zip, -donor_committee_name, -national_committee_nonfederal_account, -election_type_full, -increased_limit, -is_individual) |>
-    rename(committee_name = `committee_name...2`) |>
+  select( -unused_contbr_id, -committee_name...9, -recipient_committee_org_type, -contributor_suffix, 
+          -contributor_street_2, -contributor_id, -memo_code, -memo_code_full, -candidate_id, 
+          -candidate_name, -candidate_first_name, -candidate_last_name, -candidate_middle_name, 
+          -candidate_prefix, -candidate_suffix, -candidate_office, -candidate_office_full, 
+          -candidate_office_state, -candidate_office_state_full, -candidate_office_district, 
+          -conduit_committee_id, -conduit_committee_name, -conduit_committee_street1, 
+          -conduit_committee_street2, -conduit_committee_city, -conduit_committee_state, 
+          -conduit_committee_zip, -donor_committee_name, -national_committee_nonfederal_account, 
+          -election_type_full, -increased_limit, -is_individual) |>
+  rename(committee_name = `committee_name...2`) |>
+  filter(report_year == 2024)
+
+
+colnames(cleaned_data)
   
-  print(column_names)
-  
+```
+
+```{r}
+most_contributions <- cleaned_data |>
+  select(committee_name, contribution_receipt_amount) |>
+  group_by(committee_name) |>
+  summarize(total_contribution = sum(contribution_receipt_amount, na.rm = TRUE)) |>
+  arrange(desc(total_contribution)) 
+```
+
+
+
+```{r}
+cleaned_data |>
+  write_csv("data/cleaned_md_senate_contributions.csv")
 ```
 
 

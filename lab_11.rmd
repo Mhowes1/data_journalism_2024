@@ -108,26 +108,47 @@ You should have 10 releases when finished, not 20.
 
 Then, write code that finds the most recent release with the word "Campaign" in the title. What election does it refer to?
 
-**A2** 
+**It refers to the John King for Governor campaign.** 
 
 ```{r}
 pr_url <- "https://osp.maryland.gov/category/press-releases/"
+
+
+pr_results <- read_html(pr_url)
+
+
+link_texts <- pr_results |>
+  html_elements("a") |>
+  html_text()
+
+
+urls_pr <- pr_results |>
+  html_elements("a") |>
+  html_attr("href")
+
+
+urls_pr
 ```
 
 ```{r}
-pr_results <- pr_url |>
-  read_html()
+prs_table <- tibble(
+  url = urls_pr,
+  title = link_texts
+) |>
+  filter(title != "Read the Rest...") |>
+  separate(title, into = c("Date", "Title"), sep = ":") |>
+  mutate(Date = mdy(Date)) |>
+  slice(21, 23, 25, 27, 29, 31, 33, 35, 37, 39)
 
-
-pr_results
+prs_table
 ```
 
 ```{r}
-pr_results |> html_elements('li')
-```
+campaigns <- prs_table |>
+  filter(str_detect(Title, "Campaign")) |>
+  arrange(desc(Date))
 
-```{r}
-pr_results |> html_elements('li') |> html_text()
+campaigns
 ```
 
 
@@ -141,9 +162,62 @@ When you're done, rename the columns so they make sense, then make sure the date
 
 Finally, tell me what questions you could ask of this data, and what other information about it would be useful to have. Be creative.
 
-**A3** 
+**I think it'd be interesting to see which politicians are mentioned the most in his press releases. Obviously, Chris Van Hollen is mentioned alot. But what other politicians, especially ones out of Maryland. It would be interesting to see if there were any Republicans mentioned, to see how bipartisan he is. ** 
 
 ```{r}
+cardin_url <- "https://www.cardin.senate.gov/?post_type=press-releases"
+```
 
+```{r}
+cardin_pages <- read_html(cardin_url)
+
+cardin_pages
+```
+
+```{r}
+titles_cardin <- cardin_pages |>
+  html_elements("a") |>
+  html_text()
+```
+
+```{r}
+titles_tibble <- tibble(Title= titles_cardin)
+
+filtered_titles <- titles_tibble |>
+  filter(!str_detect(Title, "^/|Read More")) %>% 
+  slice(64:1062)
+```
+
+
+```{r}
+cardin_urls <- cardin_pages |>
+  html_elements("a") |>
+  html_attr("href")
+
+filtered_cardin_urls <- cardin_urls |>
+  str_subset("^https://www.cardin.senate.gov/press") |>
+  unique()
+
+filtered_cardin_urls <- tibble(url = filtered_cardin_urls)
+
+filtered_cardin_urls <- filtered_cardin_urls |>
+  slice(-1)
+
+```
+
+```{r}
+cardin_dates <- cardin_pages |>
+  html_elements("h5") |>
+  html_text()
+
+
+filtered_cardin_dates <- tibble(
+  Date = cardin_dates
+) |>
+  mutate(Date = mdy(Date))
+```
+
+```{r}
+Cardin_table <- bind_cols(filtered_titles, filtered_cardin_urls, filtered_cardin_dates)
 ```
 
