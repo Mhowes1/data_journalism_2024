@@ -23,11 +23,17 @@ library(lubridate)
 ```
 
 ```{r}
-install.packages('tidycensus')no
+install.packages('tidycensus')
 ```
 
 ```{r}
 library(tidycensus)
+```
+
+```{r}
+install.packages("tigris")
+
+library(tigris)
 ```
 
 
@@ -128,6 +134,8 @@ comparison <- data.frame(
 
 A: Montana was surprisingly the state with the most contributions --- edging Maryland with 202 more contributions Maryland. Maryland received the highest total sum however, with $5,516,562.24. That was $4,074,226.07 more than the next highest state, which was Montana. The other states combined recieved $7,358,970, a little less than two million more than just the state of Maryland. 
 
+You don't seem to describe which of your findings is most interesting/newsworthy. I have some ideas based on my own reading, but this is your project, so you need to tell me.
+
 
 Q2: Which out-of-state candidates received the most donations and the greatest amount of money in donations? 
 
@@ -147,6 +155,9 @@ contributions_summary <- final_data_no_md |>
 ```
 
 A2: Jon Tester, Sherrod Brown and Ruben Gallego were the top three in that order for both contributions recieved and the sum of contributions. The similarity between the three of them is that they were all Democrats running in tightly contested races. Brown was the only to lose his race. Jon Tester also clearly recieved more than the other two --- which explains why Montana received so many more out-of-state contributions than other states. Montanans for Tester received 3,679 more contributions and $238,017.96 more in total contributions compared to Friends of Sherrod Brown.
+
+The out of state recipients is interesting but also makes sense, given the Senate races in 2024. Montana and Ohio were places where incumbent Democrats faced very strong challenges (both lost), so trying to appeal to Democratic donors in Maryland seems a good strategy. Would be interesting to see if you can find examples of Maryland donors who did not give to Tester and Brown but did give the max to Alsobrooks.
+
 
 Q3: What are the demographics of people who donate to Maryland races only? To out-of-state races only?
 
@@ -379,7 +390,7 @@ jobs_to_clean <- individual_donors |>
     num_donations = n(),  
      total_donations = sum(total_donated)
   ) |> arrange(desc(number_jobs)) |>
-write_csv("jobs_to_clean.csv")
+write_csv("clean_jobs.csv")
 
 ```
 
@@ -391,7 +402,7 @@ boss_to_clean  <- individual_donors |>
     num_donations = n(),  
      total_donations = sum(total_donated)
   ) |> arrange(desc(number_jobs)) |>
-write_csv("boss_to_clean.csv")
+write_csv("cleaned_boss.csv")
 ```
 
 
@@ -400,7 +411,7 @@ clean_employer <- read_csv("cleaned_boss.csv")
 clean_occupation <- read_csv("clean_jobs.csv")
 
 clean_occupation |> 
-  group_by(cleaned_jjobs)  |> 
+  group_by(cleaned_jobs)  |> 
   summarize(
     number_jobs = n(),
     num_donations = n(),  
@@ -410,7 +421,7 @@ clean_occupation |>
 ```
 ```{r}
 clean_occupation |> 
-  group_by(cleaned_jjobs)  |> 
+  group_by(cleaned_jobs)  |> 
   summarize(
     number_jobs = n(),
     num_donations = n(),  
@@ -477,4 +488,69 @@ alsobrooks_category_totals  %>% mutate( percentage = total_amount / sum(total_am
 
 alsobrooks_category_totals
 ```
-A5: Here we see that Hogan receives signficantly more money in general in comparison to Alsobrooks. Additionally, Hogan receives many more large donations (in excess of millions) in comparison to Alsobrooks. Whereas, the small donations are around 600,000 more. This shows that eithe Hogan has a larger "fan base" of people who donate to him or perhaps his electorate is just wealthier. Additionally,it would be interesting to note whether Hogan has a higher amount of donations because he was known before. 
+
+
+```{r}
+hogan_filtered_data <- hogan_filtered_data |> 
+  mutate(contributor_zip = substr(as.character(contributor_zip), 1, 5))
+
+```
+
+```{r}
+hogan_zips <- hogan_filtered_data |>
+  group_by(contributor_zip) |>
+  summarise(count = n())
+
+write_csv(hogan_zips, "hogan_zips.csv")
+```
+
+```{r}
+alsobrooks_filtered_data <- alsobrooks_filtered_data |> 
+  mutate(contributor_zip = substr(as.character(contributor_zip), 1, 5))
+
+```
+
+```{r}
+alsobrooks_zips <- alsobrooks_filtered_data |>
+  group_by(contributor_zip) |>
+  summarise(count = n())
+
+write_csv(alsobrooks_zips, "alsobrooks_zips.csv")
+```
+
+```{r}
+hogan_large_data <- hogan_filtered_data |> 
+  mutate(contributor_zip = substr(as.character(contributor_zip), 1, 5)) |> 
+  filter(contribution_receipt_amount > 1000) |>
+  group_by(contributor_zip) |>
+  summarise(count = n())
+write_csv(hogan_large_data, "hogan_large.csv")
+```
+
+```{r}
+alsobrooks_large_data <- alsobrooks_filtered_data |> 
+  mutate(contributor_zip = substr(as.character(contributor_zip), 1, 5)) |> 
+  filter(contribution_receipt_amount > 1000) |>
+  group_by(contributor_zip) |>
+  summarise(count = n())
+write_csv(alsobrooks_large_data, "alsobrooks_large.csv")
+```
+
+A5: Here we see that Hogan receives signficantly more money in general in comparison to Alsobrooks. Additionally, Hogan receives many more large donations (in excess of millions) in comparison to Alsobrooks. Whereas, the small donations are around 600,000 more. This shows that either Hogan has a larger "fan base" of people who donate to him or perhaps his electorate is just wealthier. Additionally,it would be interesting to note whether Hogan has a higher amount of donations because he was known before. 
+
+We then looked at where these donations were from. For Hogan, his most donations came from Annapolis --- his former residence and where the state legislature is located. His second most donations came from Potomac, the zip code with the highest median household income in Maryland. However, 14 different zip codes donated more to Alsobrooks than Annapolis did for Hogan. This showed Hogan thrived off of large donations in areas that Alsobrooks did reach.
+
+We tested this using chloropleth maps to show the zip codes where the two received large donations. The map showed a lot of areas in northern Maryland he capitalized with those donations where Alsobrooks did not recieve any.  
+
+There were a few zip codes which did not register on DataWrapper when making these graphs, but they did not have more than five donations, so we did not think that it ultimately affected determining where the hot areas were for the two receiving their donations. 
+
+Map of Larry Hogan's donations by zipcode: https://www.datawrapper.de/_/5LB3T/
+
+Map of Angela Alsobrooks' donations by zipcode: 
+https://www.datawrapper.de/_/ChtAr/ 
+
+Map of Angela Alsobrooks' large donations by zipcode:
+https://www.datawrapper.de/_/BEuvY/ 
+
+Map of Larry Hogan's large donations by zipcode: 
+https://www.datawrapper.de/_/6KTF3/
