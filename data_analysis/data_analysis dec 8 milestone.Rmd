@@ -540,7 +540,7 @@ A5: Here we see that Hogan receives signficantly more money in general in compar
 
 We then looked at where these donations were from. For Hogan, his most donations came from Annapolis --- his former residence and where the state legislature is located. His second most donations came from Potomac, the zip code with the highest median household income in Maryland. However, 14 different zip codes donated more to Alsobrooks than Annapolis did for Hogan. This showed Hogan thrived off of large donations in areas that Alsobrooks did reach.
 
-We tested this using chloropleth maps to show the zip codes where the two received large donations. The map showed a lot of areas in northern Maryland he capitalized with those donations where Alsobrooks did not recieve any.  
+We tested this using chloropleth maps to show the zip codes where the two received large donations. The map showed a lot of areas in northern Maryland he capitalized with those donations where Alsobrooks did not receive any.  
 
 There were a few zip codes which did not register on DataWrapper when making these graphs, but they did not have more than five donations, so we did not think that it ultimately affected determining where the hot areas were for the two receiving their donations. 
 
